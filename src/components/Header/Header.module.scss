@@ -1,8 +1,16 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   gap: 20px;
   padding: 20px 0;
-  background-color: black;
+  background-color: rgb(107, 108, 117);
   width: 100%;
+}
+
+.searchWrap {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }

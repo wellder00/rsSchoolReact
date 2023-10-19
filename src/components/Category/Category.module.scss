@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.label {
+  display: block;
+  cursor: pointer;
+  color: wheat;
+  font-size: 18px;
+  border: 1px solid grey;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.label.active {
+  background-color: rgb(87, 121, 171);
+}
+
+.checker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

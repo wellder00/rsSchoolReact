@@ -10,7 +10,6 @@ type Props = {
 class Button extends Component<Props> {
   render() {
     const buttonClasses = classNames(styles[this.props.className], styles.button);
-
     return <button className={buttonClasses}>{this.props.children}</button>;
   }
 }
