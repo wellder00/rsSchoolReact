@@ -1,17 +1,34 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import styles from './Home.module.scss';
 import { Header } from '../../components/Header';
 import { getRickAndMortyData } from '../../api/api';
 import { Main } from '../../components/Main';
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     rickAndMortyData: null,
   };
 
-  handleCategoryChange = async (selectedCategory: string) => {
+  async componentDidMount() {
+    const cachedData = this.getRickAndMortyDataFromLocalStorage();
+    if (cachedData) {
+      this.setState({ rickAndMortyData: cachedData });
+    } else {
+      this.findCharacter('');
+    }
+  }
+
+  getRickAndMortyDataFromLocalStorage() {
+    const cachedData = localStorage.getItem('rickAndMortyData');
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    }
+    return null;
+  }
+
+  findCharacter = async (character: string) => {
     try {
-      const data = await getRickAndMortyData(selectedCategory);
+      const data = await getRickAndMortyData(character);
       this.setState({ rickAndMortyData: data });
     } catch (error) {
       console.error(error);
@@ -21,9 +38,11 @@ export default class Home extends Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <Header onCategoryChange={this.handleCategoryChange} />
+        <Header findCharacter={this.findCharacter} />
         <Main rickAndMortyData={this.state.rickAndMortyData} />
       </div>
     );
   }
 }
+
+export default Home;

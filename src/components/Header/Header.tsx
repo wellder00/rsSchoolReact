@@ -1,25 +1,39 @@
 import { Component } from 'react';
-
 import styles from './Header.module.scss';
-
 import { InputSearch } from '../InputSearch';
 import { Button } from '../Button';
-import { Category } from '../Category';
 
 type Props = {
-  onCategoryChange: (selectedCategory: string) => void;
+  findCharacter: (selectedCategory: string) => void;
 };
 
 class Header extends Component<Props> {
+  state = {
+    inputValue: '',
+  };
+
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ inputValue: event.target.value });
+  };
+
+  handleSearch = () => {
+    this.props.findCharacter(this.state.inputValue);
+  };
+
   render() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.searchWrap}>
-          <InputSearch className={'search'} placeholder={'search'} />
-          <Button className={'search'}>SEARCH</Button>
-        </div>
-        <div>
-          <Category onCategoryChange={this.props.onCategoryChange} />
+          <InputSearch
+            className={'search'}
+            placeholder={'search'}
+            value={this.state.inputValue}
+            onChange={this.handleInputChange}
+            getInputValue={this.handleSearch}
+          />
+          <Button className={'search'} getInputValue={this.handleSearch}>
+            SEARCH
+          </Button>
         </div>
       </div>
     );

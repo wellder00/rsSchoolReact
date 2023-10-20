@@ -1,14 +1,24 @@
 import { RickAndMortyAPI } from '../utils/constants/api';
 
-export async function getRickAndMortyData(category: string) {
+export async function getRickAndMortyData(character: string) {
   try {
-    const response = await fetch(`${RickAndMortyAPI}/${category.toLowerCase()}`);
-    if (!response.ok) {
-      throw new Error('ERROR HTTP: ' + response.status);
+    if (character === '') {
+      const response = await fetch(RickAndMortyAPI);
+      if (!response.ok) {
+        throw new Error('ERROR HTTP: ' + response.status);
+      }
+      const data = await response.json();
+      localStorage.setItem('rickAndMortyData', JSON.stringify(data));
+      return data;
+    } else {
+      const response = await fetch(`${RickAndMortyAPI}/?name=${character.toLowerCase()}`);
+      if (!response.ok) {
+        throw new Error('ERROR HTTP: ' + response.status);
+      }
+      const data = await response.json();
+      localStorage.setItem('rickAndMortyData', JSON.stringify(data));
+      return data;
     }
-    const data = await response.json();
-    console.log(data);
-    return data;
   } catch (error) {
     console.error('Request ERROR:', error);
   }

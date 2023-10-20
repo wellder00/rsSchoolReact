@@ -3,10 +3,10 @@ import { Component } from 'react';
 import styles from './Main.module.scss';
 
 import { CardBlock } from '../Card';
-import { Character, Episode, Info, Location } from '../../types/interfaces';
+import { Character, Info } from '../../types/interfaces';
 
 type Props = {
-  rickAndMortyData: Info<Character | Location | Episode> | null;
+  rickAndMortyData: Info<Character> | null;
 };
 
 class Main extends Component<Props> {
