@@ -9,8 +9,27 @@ type Props = {
 };
 
 class CardBlock extends Component<Props> {
+  state = {
+    loading: true,
+  };
+
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.rickAndMortyData !== this.props.rickAndMortyData) {
+      this.setState({ loading: false });
+    }
+  }
+
   render() {
     const { rickAndMortyData } = this.props;
+    const { loading } = this.state;
+
+    if (loading) {
+      return (
+        <div className={styles.loading}>
+          <div className={styles.loadingIcon}>Loading...</div>
+        </div>
+      );
+    }
 
     if (rickAndMortyData && rickAndMortyData.results) {
       return (
