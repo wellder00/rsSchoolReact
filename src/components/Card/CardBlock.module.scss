@@ -7,16 +7,36 @@
 }
 
 .wrapCard {
+  width: 250px;
   padding: 10px;
   border: 1px solid green;
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  text-align: center;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: scale(1.05);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   }
 }
 
-.loadingIcon { 
+.loadingIcon {
   font-size: 25px;
 }
 
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 10px 0;
+}
+
+.infoCharacter {
+  padding-bottom: 20px;
+}
+
+.img {
+  width: 100%;
+}

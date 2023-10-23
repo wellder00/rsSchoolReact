@@ -14,6 +14,16 @@ class Header extends Component<Props> {
     hasError: false,
   };
 
+  async componentDidMount() {
+    const storedData = localStorage.getItem('character');
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      this.setState({ inputValue: parsedData });
+    } else {
+      this.setState({ inputValue: '' });
+    }
+  }
+
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ inputValue: event.target.value });
   };

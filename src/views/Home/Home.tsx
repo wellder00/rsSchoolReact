@@ -10,20 +10,23 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-    const cachedData = this.getRickAndMortyDataFromLocalStorage();
-    if (cachedData) {
-      this.setState({ rickAndMortyData: cachedData });
+    const storedData = localStorage.getItem('character');
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        const data = await getRickAndMortyData(parsedData);
+        this.setState({ rickAndMortyData: data });
+      } catch (error) {
+        console.error(error);
+      }
     } else {
-      this.findCharacter('');
+      try {
+        const data = await getRickAndMortyData('');
+        this.setState({ rickAndMortyData: data });
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
-
-  getRickAndMortyDataFromLocalStorage() {
-    const cachedData = localStorage.getItem('rickAndMortyData');
-    if (cachedData) {
-      return JSON.parse(cachedData);
-    }
-    return null;
   }
 
   findCharacter = async (character: string) => {

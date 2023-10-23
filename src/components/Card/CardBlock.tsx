@@ -36,11 +36,19 @@ class CardBlock extends Component<Props> {
         <div className={styles.wrapper}>
           {rickAndMortyData.results.map((data) => (
             <div className={styles.wrapCard} key={data.id}>
-              <h4>Name: {data.name}</h4>
-              <p>Status: {data.status}</p>
-              <p>Species: {data.species}</p>
-              <p>Gender: {data.gender}</p>
-              <img src={data.image} alt={data.name}></img>
+              <div className={styles.infoCharacter}>
+                <h4 className={styles.title}>{data.name}</h4>
+                <div>Status: {data.status}</div>
+                <div>Species: {data.species}</div>
+                <div>Gender: {data.gender}</div>
+              </div>
+              <img
+                width="300"
+                height="300"
+                className={styles.img}
+                src={data.image}
+                alt={data.name}
+              ></img>
             </div>
           ))}
         </div>

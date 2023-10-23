@@ -54,18 +54,6 @@ export interface Character extends ResourceBase {
   episode: string[];
 }
 
-export interface Location extends ResourceBase {
-  type: string;
-  dimension: string;
-  residents: string[];
-}
-
-export interface Episode extends ResourceBase {
-  air_date: string;
-  episode: string;
-  characters: string[];
-}
-
 export interface ApiResponse<T> {
   /** The HTTP status code from the API response */
   status: number;
