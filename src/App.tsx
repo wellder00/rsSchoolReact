@@ -1,13 +1,11 @@
-import { ErrorBoundary } from 'react-error-boundary';
-
+import { ErrorBoundary } from './components/ErrorBoundary';
 import './index.scss';
 import { Home } from './views/Home';
-import { ErrorFallback } from './components/ErrorFallback';
 
 function App() {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Home />;
+    <ErrorBoundary>
+      <Home />
     </ErrorBoundary>
   );
 }

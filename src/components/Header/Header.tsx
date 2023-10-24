@@ -57,7 +57,7 @@ class Header extends Component<Props> {
             SEARCH
           </Button>
 
-          <Button className={'search'} onClickFunction={this.handleMakeError}>
+          <Button className={'error'} onClickFunction={this.handleMakeError}>
             TRY MAKE ERROR
           </Button>
         </div>

@@ -2,17 +2,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 20px;
+  gap: 20px;  
 }
 
-.wrapCard {
+.card {
+  background: linear-gradient(135deg, #bdb9b5, #096874, #dce1dc);
   width: 250px;
   padding: 10px;
   border: 1px solid green;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
 
@@ -22,10 +21,6 @@
   }
 }
 
-.loadingIcon {
-  font-size: 25px;
-}
-
 .title {
   white-space: nowrap;
   overflow: hidden;
@@ -33,10 +28,11 @@
   margin: 10px 0;
 }
 
-.infoCharacter {
+.characterInfo {
   padding-bottom: 20px;
 }
 
-.img {
+.characterImage {
   width: 100%;
+  border-radius: 15px;
 }

@@ -13,7 +13,9 @@ class Main extends Component<Props> {
   render() {
     return (
       <div className={styles.wrapper}>
-        <CardBlock rickAndMortyData={this.props.rickAndMortyData} />
+        <div className={styles.wrapCard}>
+          <CardBlock rickAndMortyData={this.props.rickAndMortyData} />
+        </div>
       </div>
     );
   }

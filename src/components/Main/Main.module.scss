@@ -1,4 +1,14 @@
 .wrapper {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  background: linear-gradient(0deg, #040100, #d67a09, #bf9056);
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wrapCard {
   max-width: 1200px;
   padding: 20px 0;
 }

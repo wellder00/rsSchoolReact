@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import styles from './Button.module.scss';
 import classNames from 'classnames';
+
+import styles from './Button.module.scss';
 
 type Props = {
   children: string;
