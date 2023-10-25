@@ -1,8 +1,12 @@
 import { Component } from 'react';
 
 import styles from './Header.module.scss';
+
 import { InputSearch } from '../InputSearch';
 import { Button } from '../Button';
+
+import title from '../../../public/title.png';
+import logo from '../../../public/logo.png';
 
 type Props = {
   findCharacter: (selectedCategory: string) => void;
@@ -44,6 +48,7 @@ class Header extends Component<Props> {
 
     return (
       <div className={styles.wrapper}>
+        <img className={styles.titleImg} src={title} alt="title" />
         <div className={styles.searchWrap}>
           <InputSearch
             className={'search'}
@@ -61,6 +66,7 @@ class Header extends Component<Props> {
             TRY MAKE ERROR
           </Button>
         </div>
+        <img className={styles.logo} src={logo} alt="logo" />
       </div>
     );
   }

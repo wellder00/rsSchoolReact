@@ -1,17 +1,28 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import styles from './CardBlock.module.scss';
 import { Character, Info } from '../../types/interfaces';
+import { Loader } from '../Loader';
+import { NotFound } from '../NotFound';
 
 type Props = {
   rickAndMortyData: Info<Character> | null;
 };
 
 class CardBlock extends Component<Props> {
+  state = {
+    loading: true,
+  };
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.rickAndMortyData !== this.props.rickAndMortyData) {
+      this.setState({ loading: false });
+    }
+  }
+
   renderCharacterCard(data: Character) {
     return (
       <div className={styles.card} key={data.id}>
         <div className={styles.characterInfo}>
-          <h4 className={styles.title}>{data.name}</h4>
+          <h2 className={styles.title}>{data.name}</h2>
           <div>Status: {data.status}</div>
           <div>Species: {data.species}</div>
           <div>Gender: {data.gender}</div>
@@ -22,10 +33,16 @@ class CardBlock extends Component<Props> {
   }
 
   render() {
+    const { loading } = this.state;
+
+    if (loading) {
+      return <Loader />;
+    }
+
     const { rickAndMortyData } = this.props;
 
     if (!rickAndMortyData) {
-      return <div>NOT FOUND</div>;
+      return <NotFound />;
     }
 
     return (
