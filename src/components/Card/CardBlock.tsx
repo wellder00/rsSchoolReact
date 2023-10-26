@@ -1,8 +1,11 @@
 import { Component } from 'react';
+
 import styles from './CardBlock.module.scss';
-import { Character, Info } from '../../types/interfaces';
+
 import { Loader } from '../Loader';
 import { NotFound } from '../NotFound';
+
+import { Character, Info } from '../../types/interfaces';
 
 type Props = {
   rickAndMortyData: Info<Character> | null;

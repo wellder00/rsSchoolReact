@@ -4,8 +4,8 @@ import styles from './Main.module.scss';
 
 import { CardBlock } from '../Card';
 import { Character, Info } from '../../types/interfaces';
-import teleportTop from '../../../public/teleportTop.png';
-import teleportBottom from '../../../public/teleportBottom.png';
+import teleportTop from '../../assets/images/teleportTop.png';
+import teleportBottom from '../../assets/images/teleportBottom.png';
 
 type Props = {
   rickAndMortyData: Info<Character> | null;

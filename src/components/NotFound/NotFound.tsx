@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import styles from './NotFound.module.scss';
-import notFound from '../../../public/notFound.png';
+import notFound from '../../assets/images/notFound.png';
 
 class NotFound extends Component {
   render() {

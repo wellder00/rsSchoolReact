@@ -5,8 +5,8 @@ import styles from './Header.module.scss';
 import { InputSearch } from '../InputSearch';
 import { Button } from '../Button';
 
-import title from '../../../public/title.png';
-import logo from '../../../public/logo.png';
+import title from '../../assets/images/title.png';
+import logo from '../../assets/images/logo.png';
 
 type Props = {
   findCharacter: (selectedCategory: string) => void;
