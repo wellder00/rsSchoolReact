@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styles from './Header.module.scss';
 
@@ -12,64 +12,58 @@ type Props = {
   findCharacter: (selectedCategory: string) => void;
 };
 
-class Header extends Component<Props> {
-  state = {
-    inputValue: '',
-    hasError: false,
-  };
+const Header: React.FC<Props> = ({ findCharacter }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [hasError, setHasError] = useState(false);
 
-  async componentDidMount() {
+  useEffect(() => {
     const storedData = localStorage.getItem('character');
     if (storedData) {
       const parsedData = JSON.parse(storedData);
-      this.setState({ inputValue: parsedData });
-    } else {
-      this.setState({ inputValue: '' });
+      setInputValue(parsedData);
     }
+  }, []);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSearch = () => {
+    findCharacter(inputValue);
+    setInputValue('');
+  };
+
+  const handleMakeError = () => {
+    setHasError(true);
+  };
+
+  if (hasError) {
+    throw new Error('Everything is broken, everything is destroyed');
   }
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ inputValue: event.target.value });
-  };
+  return (
+    <div className={styles.wrapper}>
+      <img className={styles.titleImg} src={title} alt="title" />
+      <div className={styles.searchWrap}>
+        <InputSearch
+          className={'search'}
+          placeholder={'search'}
+          value={inputValue}
+          onChange={handleInputChange}
+          getInputValue={handleSearch}
+        />
 
-  handleSearch = () => {
-    this.props.findCharacter(this.state.inputValue);
-    this.setState({ inputValue: '' });
-  };
+        <Button className={'search'} onClickFunction={handleSearch}>
+          SEARCH
+        </Button>
 
-  handleMakeError = () => {
-    this.setState({ hasError: true });
-  };
-
-  render() {
-    if (this.state.hasError) {
-      throw new Error('Everything is broken, everything is destroyed');
-    }
-
-    return (
-      <div className={styles.wrapper}>
-        <img className={styles.titleImg} src={title} alt="title" />
-        <div className={styles.searchWrap}>
-          <InputSearch
-            className={'search'}
-            placeholder={'search'}
-            value={this.state.inputValue}
-            onChange={this.handleInputChange}
-            getInputValue={this.handleSearch}
-          />
-
-          <Button className={'search'} onClickFunction={this.handleSearch}>
-            SEARCH
-          </Button>
-
-          <Button className={'error'} onClickFunction={this.handleMakeError}>
-            TRY MAKE ERROR
-          </Button>
-        </div>
-        <img className={styles.logo} src={logo} alt="logo" />
+        <Button className={'error'} onClickFunction={handleMakeError}>
+          TRY MAKE ERROR
+        </Button>
       </div>
-    );
-  }
-}
+      <img className={styles.logo} src={logo} alt="logo" />
+    </div>
+  );
+};
 
 export default Header;

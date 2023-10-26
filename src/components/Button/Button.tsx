@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 import styles from './Button.module.scss';
@@ -9,15 +9,14 @@ type Props = {
   onClickFunction: () => void;
 };
 
-class Button extends Component<Props> {
-  render() {
-    const buttonClasses = classNames(styles[this.props.className], styles.button);
-    return (
-      <button onClick={this.props.onClickFunction} className={buttonClasses}>
-        {this.props.children}
-      </button>
-    );
-  }
-}
+const Button: React.FC<Props> = ({ children, className, onClickFunction }) => {
+  const buttonClasses = classNames(styles[className], styles.button);
+
+  return (
+    <button onClick={onClickFunction} className={buttonClasses}>
+      {children}
+    </button>
+  );
+};
 
 export default Button;
