@@ -20,13 +20,7 @@ export interface CharacterFilter {
   name?: string;
   type?: string;
   species?: string;
-  /**
-   * 'Dead' | 'Alive' | 'unknown'
-   */
   status?: string;
-  /**
-   * 'Female' | 'Male' | 'Genderless' | 'unknown'
-   */
   gender?: string;
   page?: number;
 }
@@ -36,10 +30,6 @@ export interface LocationFilter extends Pick<CharacterFilter, 'name' | 'type' | 
 }
 
 export interface EpisodeFilter extends Pick<CharacterFilter, 'name' | 'page'> {
-  /**
-   * Filter by the given episode code.
-   * i.e: `{ episode: "S01E01" }`
-   */
   episode?: string;
 }
 
@@ -55,23 +45,16 @@ export interface Character extends ResourceBase {
 }
 
 export interface ApiResponse<T> {
-  /** The HTTP status code from the API response */
   status: number;
-  /** The HTTP status message from the API response */
   statusMessage: string;
-  /** The response that was provided by the API */
   data: T;
 }
 
 export interface Info<T> {
   info?: {
-    /** The length of the response */
     count: number;
-    /** The amount of pages */
     pages: number;
-    /** Link to the next page (if it exists) */
     next: string | null;
-    /** Link to the previous page (if it exists) */
     prev: string | null;
   };
   results?: T[];
