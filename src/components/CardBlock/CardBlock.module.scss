@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -7,7 +9,7 @@
 }
 
 .card {
-  background: linear-gradient(135deg, #bdb9b5, #096874, #dce1dc);
+  background: $card-color;
   width: 250px;
   padding: 10px;
   border: 1px solid green;

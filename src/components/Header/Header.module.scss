@@ -1,10 +1,12 @@
+@import '../../styles/variables.scss';
+
 .wrapper {
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 20px;
   padding: 20px 0;
-  background: linear-gradient(135deg, #bdb9b5, #096874, #dce1dc);
+  background: $card-color;
   width: 100%;
   @media (max-width: 1015px) {
     flex-direction: column;

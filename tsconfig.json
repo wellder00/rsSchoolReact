@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@assets/*": ["./assets/*"],
+      "@components/*": ["./components/*"],
+      "@styles/*": ["./styles/*"],
+      "@types/*": ["./types/*"],
+    },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,

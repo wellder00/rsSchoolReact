@@ -1,17 +1,31 @@
+@import '../../styles/variables.scss';
+
 .wrapper {
   position: relative;
   display: flex;
   flex: 1;
   justify-content: center;
-  background: linear-gradient(0deg, #040100, #d67a09, #bf9056);
+  background: $bg-main-color;
   color: #fff;
   width: 100%;
   box-sizing: border-box;
 }
 
+.infoAndCardWrap {
+  display: flex;
+  max-width: 1200px;
+  
+}
+
 .wrapCard {
   max-width: 1200px;
   padding: 20px 0;
+  flex: 2;
+}
+
+.characterInfo {  
+  background-color: #20575a;
+  flex: 1;
 }
 
 .teleportTop {
