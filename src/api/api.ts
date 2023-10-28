@@ -1,6 +1,7 @@
+import { Character, Info } from '../types/interfaces';
 import { RickAndMortyAPI } from '../utils/constants/api';
 
-export async function getRickAndMortyData(character: string) {
+export async function getRickAndMortyData(character: string): Promise<Info<Character> | null> {
   try {
     if (character === '') {
       localStorage.setItem('character', JSON.stringify(character));
@@ -21,5 +22,6 @@ export async function getRickAndMortyData(character: string) {
     }
   } catch (error) {
     console.error('Request ERROR:', error);
+    return null;
   }
 }
