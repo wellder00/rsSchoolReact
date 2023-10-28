@@ -25,14 +25,6 @@ export interface CharacterFilter {
   page?: number;
 }
 
-export interface LocationFilter extends Pick<CharacterFilter, 'name' | 'type' | 'page'> {
-  dimension?: string;
-}
-
-export interface EpisodeFilter extends Pick<CharacterFilter, 'name' | 'page'> {
-  episode?: string;
-}
-
 export interface Character extends ResourceBase {
   status: 'Dead' | 'Alive' | 'unknown';
   species: string;
@@ -50,12 +42,12 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export interface Info<T> {
+export interface Info<Character> {
   info?: {
     count: number;
     pages: number;
     next: string | null;
     prev: string | null;
   };
-  results?: T[];
+  results?: Character[];
 }
