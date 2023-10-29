@@ -1,0 +1,32 @@
+.button {
+  cursor: pointer;
+  font-size: 20px;
+  font-family: 'Metal Mania', sans-serif;
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.search {
+  background-color: #3498db;
+
+  &:hover {
+    background-color: #5eaae8;
+  }
+
+  &:active {
+    background-color: #0e5c99;
+  }
+}
+
+.error {
+  background-color: red;
+  &:hover {
+    background-color: rgb(237, 41, 41);
+  }
+
+  &:active {
+    background-color: rgb(245, 9, 9);
+  }
+}

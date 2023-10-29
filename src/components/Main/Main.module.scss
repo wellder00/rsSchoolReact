@@ -1,0 +1,41 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  background: linear-gradient(0deg, #040100, #d67a09, #bf9056);
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wrapCard {
+  max-width: 1200px;
+  padding: 20px 0;
+}
+
+.teleportTop {
+  width: 300px;
+  position: absolute;
+  left: 15px;
+  top: 40px;
+  @media (max-width: 1780px) {
+    width: 200px;
+  }
+  @media (max-width: 1605px) {
+    display: none;
+  }
+}
+
+.teleportBottom {
+  width: 300px;
+  position: absolute;
+  right: 15px;
+  bottom: 40px;
+  @media (max-width: 1780px) {
+    width: 200px;
+  }
+  @media (max-width: 1605px) {
+    display: none;
+  }
+}
