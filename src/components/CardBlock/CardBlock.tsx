@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import styles from './CardBlock.module.scss';
 
@@ -14,6 +15,8 @@ type Props = {
 
 const CardBlock: React.FC<Props> = ({ rickAndMortyData }) => {
   const [loading, setLoading] = useState(true);
+  const path = useLocation();
+  console.log(path.pathname);
 
   useEffect(() => {
     setLoading(false);
@@ -21,9 +24,11 @@ const CardBlock: React.FC<Props> = ({ rickAndMortyData }) => {
 
   const renderCharacterCard = (data: Character) => (
     <Link className={styles.link} key={data.id} to={`about_character/${data.id}`}>
-      <div className={styles.card}>
+      <div className={`${path.pathname === '/' ? styles.card : styles.miniCard}`}>
         <div className={styles.characterInfo}>
-          <h2 className={styles.title}>{data.name}</h2>
+          <h2 className={`${path.pathname === '/' ? styles.title : styles.miniTitle}`}>
+            {data.name}
+          </h2>
           <div className={styles.characteristic}>Status: {data.status}</div>
           <div className={styles.characteristic}>Species: {data.species}</div>
           <div className={styles.characteristic}>Gender: {data.gender}</div>

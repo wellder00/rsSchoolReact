@@ -15,9 +15,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   if (!response.ok) {
     throw new Error('ERROR HTTP: ' + response.status);
   }
-
   const character = await response.json();
-
   return { character };
 };
 
