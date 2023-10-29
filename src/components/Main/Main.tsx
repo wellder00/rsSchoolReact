@@ -20,9 +20,7 @@ const Main: React.FC<Props> = ({ rickAndMortyData }) => {
         <div className={styles.wrapCard}>
           <CardBlock rickAndMortyData={rickAndMortyData} />
         </div>
-        <div className={styles.characterInfo}>
-          <Outlet />
-        </div>
+        {rickAndMortyData && <Outlet />}
       </div>
       <img className={styles.teleportBottom} src={teleportBottom} alt="teleportBottom" />
     </div>

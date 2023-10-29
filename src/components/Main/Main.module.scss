@@ -14,7 +14,7 @@
 .infoAndCardWrap {
   display: flex;
   max-width: 1200px;
-  
+  padding: 0 15px;
 }
 
 .wrapCard {
@@ -23,10 +23,7 @@
   flex: 2;
 }
 
-.characterInfo {  
-  background-color: #20575a;
-  flex: 1;
-}
+
 
 .teleportTop {
   width: 300px;

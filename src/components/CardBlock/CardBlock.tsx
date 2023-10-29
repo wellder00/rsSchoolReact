@@ -20,13 +20,13 @@ const CardBlock: React.FC<Props> = ({ rickAndMortyData }) => {
   }, [rickAndMortyData]);
 
   const renderCharacterCard = (data: Character) => (
-    <Link key={data.id} to={'about_character/:characterId'}>
+    <Link className={styles.link} key={data.id} to={`about_character/${data.id}`}>
       <div className={styles.card}>
         <div className={styles.characterInfo}>
           <h2 className={styles.title}>{data.name}</h2>
-          <div>Status: {data.status}</div>
-          <div>Species: {data.species}</div>
-          <div>Gender: {data.gender}</div>
+          <div className={styles.characteristic}>Status: {data.status}</div>
+          <div className={styles.characteristic}>Species: {data.species}</div>
+          <div className={styles.characteristic}>Gender: {data.gender}</div>
         </div>
         <img className={styles.characterImage} src={data.image} alt={data.name} />
       </div>

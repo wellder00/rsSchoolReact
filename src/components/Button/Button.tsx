@@ -5,8 +5,8 @@ import styles from './Button.module.scss';
 
 type Props = {
   children: string;
-  className: string;
-  onClickFunction: () => void;
+  className?: string;
+  onClickFunction?: () => void;
 };
 
 const Button: React.FC<Props> = ({ children, className, onClickFunction }) => {

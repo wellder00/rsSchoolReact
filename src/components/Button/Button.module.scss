@@ -30,3 +30,16 @@
     background-color: rgb(245, 9, 9);
   }
 }
+
+.backButton {
+  margin: 20px 0;
+  background-color: #3498db;
+
+  &:hover {
+    background-color: #5eaae8;
+  }
+
+  &:active {
+    background-color: #0e5c99;
+  }
+}
