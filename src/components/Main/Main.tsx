@@ -15,6 +15,10 @@ type Props = {
 const Main: React.FC<Props> = ({ rickAndMortyData }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const count = rickAndMortyData?.info?.count;
+  const nextPage = rickAndMortyData?.info?.next;
+  const prevPage = rickAndMortyData?.info?.prev;
+  console.log(count, nextPage, prevPage);
 
   function handleBack() {
     if (pathname !== '/') {

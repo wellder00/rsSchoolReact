@@ -1,35 +1,32 @@
 import { useEffect, useState } from 'react';
-
 import styles from './Home.module.scss';
-
-import { Header } from '@components/Header';
-import { Main } from '@components/Main';
-import { ErrorBoundary } from '@components/ErrorBoundary';
-
-import { Character, Info } from '../../types/interfaces';
+import { Header } from '../../components/Header';
 import { getRickAndMortyData } from '../../api/api';
-
-function Home() {
+import { Main } from '../../components/Main';
+import { Character, Info } from 'types/interfaces';
+const Home = () => {
   const [rickAndMortyData, setRickAndMortyData] = useState<Info<Character> | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      const storedData = localStorage.getItem('character');
+    async function fetchData(character: string) {
       try {
-        if (storedData) {
-          const parsedData = JSON.parse(storedData);
-          const data = await getRickAndMortyData(parsedData);
-          setRickAndMortyData(data);
-        } else {
-          const data = await getRickAndMortyData('');
-          setRickAndMortyData(data);
-        }
+        const data = await getRickAndMortyData(character);
+        setRickAndMortyData(data);
       } catch (error) {
         console.error(error);
       }
     }
-
-    fetchData();
+    const storedData = localStorage.getItem('character');
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        fetchData(parsedData);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      fetchData('');
+    }
   }, []);
 
   const findCharacter = async (character: string) => {
@@ -42,13 +39,11 @@ function Home() {
   };
 
   return (
-    <ErrorBoundary>
-      <div className={styles.wrapper}>
-        <Header findCharacter={findCharacter} />
-        <Main rickAndMortyData={rickAndMortyData} />
-      </div>
-    </ErrorBoundary>
+    <div className={styles.wrapper}>
+      <Header findCharacter={findCharacter} />
+      <Main rickAndMortyData={rickAndMortyData} />
+    </div>
   );
-}
+};
 
 export default Home;
