@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import styles from './CardBlock.module.scss';
 
@@ -7,7 +7,6 @@ import { Loader } from '../Loader';
 import { NotFound } from '../NotFound';
 
 import { Character, Info } from '../../types/interfaces';
-import { Link } from 'react-router-dom';
 
 type Props = {
   rickAndMortyData: Info<Character> | null;
@@ -15,8 +14,7 @@ type Props = {
 
 const CardBlock: React.FC<Props> = ({ rickAndMortyData }) => {
   const [loading, setLoading] = useState(true);
-  const path = useLocation();
-  console.log(path.pathname);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     setLoading(false);
@@ -24,11 +22,9 @@ const CardBlock: React.FC<Props> = ({ rickAndMortyData }) => {
 
   const renderCharacterCard = (data: Character) => (
     <Link className={styles.link} key={data.id} to={`about_character/${data.id}`}>
-      <div className={`${path.pathname === '/' ? styles.card : styles.miniCard}`}>
+      <div className={`${pathname === '/' ? styles.card : styles.miniCard}`}>
         <div className={styles.characterInfo}>
-          <h2 className={`${path.pathname === '/' ? styles.title : styles.miniTitle}`}>
-            {data.name}
-          </h2>
+          <h2 className={`${pathname === '/' ? styles.title : styles.miniTitle}`}>{data.name}</h2>
           <div className={styles.characteristic}>Status: {data.status}</div>
           <div className={styles.characteristic}>Species: {data.species}</div>
           <div className={styles.characteristic}>Gender: {data.gender}</div>

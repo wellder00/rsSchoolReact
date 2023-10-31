@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
 import styles from './Main.module.scss';
 
@@ -13,11 +13,20 @@ type Props = {
 };
 
 const Main: React.FC<Props> = ({ rickAndMortyData }) => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  function handleBack() {
+    if (pathname !== '/') {
+      navigate('/');
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
       <img className={styles.teleportTop} src={teleportTop} alt="teleportTop" />
       <div className={styles.infoAndCardWrap}>
-        <div className={styles.wrapCard}>
+        <div onClick={handleBack} className={styles.wrapCard}>
           <CardBlock rickAndMortyData={rickAndMortyData} />
         </div>
         {rickAndMortyData && <Outlet />}
