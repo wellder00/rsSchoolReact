@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 import { Header } from '../../components/Header';
-import { getRickAndMortyData } from '../../api/api';
+import { getPokemon } from '../../api/api';
 import { Main } from '../../components/Main';
-import { Character, Info } from 'types/interfaces';
+// import { Pokemon } from 'types/interfaces';
+
 const Home = () => {
-  const [rickAndMortyData, setRickAndMortyData] = useState<Info<Character> | null>(null);
+  const [pokemonData, setPokemonData] = useState(null);
 
   useEffect(() => {
-    async function fetchData(character: string) {
+    async function fetchData(pokemon: string) {
       try {
-        const data = await getRickAndMortyData(character);
-        setRickAndMortyData(data);
+        const data = await getPokemon(pokemon);
+        setPokemonData(data);
       } catch (error) {
         console.error(error);
       }
     }
-    const storedData = localStorage.getItem('character');
+    const storedData = localStorage.getItem('pokemon');
     if (storedData) {
       try {
         const parsedData = JSON.parse(storedData);
@@ -31,8 +32,15 @@ const Home = () => {
 
   const findCharacter = async (character: string) => {
     try {
-      const data = await getRickAndMortyData(character);
-      setRickAndMortyData(data);
+      const data = await getPokemon(character);
+      if (character === '') {
+        setPokemonData(data);
+      } else {
+        const pokemonInfo = {
+          results: [data],
+        };
+        setPokemonData(pokemonInfo);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +49,7 @@ const Home = () => {
   return (
     <div className={styles.wrapper}>
       <Header findCharacter={findCharacter} />
-      <Main rickAndMortyData={rickAndMortyData} />
+      <Main pokemonData={pokemonData} />
     </div>
   );
 };

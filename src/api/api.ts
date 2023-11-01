@@ -1,35 +1,18 @@
-import { Character, Info } from '../types/interfaces';
-import { RickAndMortyAPI } from '../utils/constants/api';
+import axios from 'axios';
 
-export async function getRickAndMortyData(
-  character: string | number
-): Promise<Info<Character> | null> {
+import { pokemonAPI } from '../utils/constants/api';
+
+export async function getPokemon(pokemon: string, offset?: number, limit?: number) {
   try {
-    if (character === '') {
-      localStorage.setItem('character', JSON.stringify(character));
-      const response = await fetch(RickAndMortyAPI);
-      if (!response.ok) {
-        throw new Error('ERROR HTTP: ' + response.status);
-      }
-      const data = await response.json();
-      return data;
-    } else if (isNaN(parseInt(character as string))) {
-      localStorage.setItem('character', JSON.stringify(character));
-      const response = await fetch(
-        `${RickAndMortyAPI}/?name=${(character as string).toLowerCase()}`
-      );
-      if (!response.ok) {
-        throw new Error('ERROR HTTP: ' + response.status);
-      }
-      const data = await response.json();
-      return data;
+    console.log(offset, limit);
+    if (pokemon === '') {
+      localStorage.setItem('pokemon', JSON.stringify(pokemon));
+      const response = await axios.get(pokemonAPI);
+      return response.data;
     } else {
-      const response = await fetch(`${RickAndMortyAPI}/${character}`);
-      if (!response.ok) {
-        throw new Error('ERROR HTTP: ' + response.status);
-      }
-      const data = await response.json();
-      return data;
+      localStorage.setItem('pokemon', JSON.stringify(pokemon));
+      const response = await axios.get(`${pokemonAPI}/${pokemon}`);
+      return response.data;
     }
   } catch (error) {
     console.error('Request ERROR:', error);

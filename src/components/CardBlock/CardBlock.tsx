@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import axios from 'axios';
 
 import styles from './CardBlock.module.scss';
 
@@ -9,27 +10,66 @@ import { NotFound } from '../NotFound';
 import { Character, Info } from '../../types/interfaces';
 
 type Props = {
-  rickAndMortyData: Info<Character> | null;
+  pokemonData: Info<Character> | null;
 };
 
-const CardBlock: React.FC<Props> = ({ rickAndMortyData }) => {
+const CardBlock: React.FC<Props> = ({ pokemonData }) => {
   const [loading, setLoading] = useState(true);
+  const [pokemons, setPokemons] = useState([]);
   const { pathname } = useLocation();
 
+  async function getPokemon() {
+    if (!pokemonData.results) {
+      return;
+    } else if (pokemonData.results) {
+      console.log(pokemonData.results);
+      const requests = pokemonData.results.map(async (person) => {
+        try {
+          if (person.url) {
+            const response = await axios.get(person.url);
+            return {
+              id: response?.data.id,
+              name: response?.data.name,
+              weight: response?.data?.weight,
+              species: response?.data?.species?.name,
+              sprites: response?.data?.sprites?.front_shiny,
+            };
+          } else if (person.id) {
+            return {
+              id: person?.id,
+              name: person?.name,
+              weight: person?.weight,
+              species: person?.species?.name,
+              sprites: person?.sprites?.front_shiny,
+            };
+          }
+        } catch (error) {
+          console.error('Request ERROR:', error);
+          return null;
+        }
+      });
+      const responses = await Promise.all(requests);
+      setPokemons(responses);
+    }
+  }
+
   useEffect(() => {
-    setLoading(false);
-  }, [rickAndMortyData]);
+    async function fetchData() {
+      await getPokemon();
+      setLoading(false);
+    }
+    fetchData();
+  }, [pokemonData]);
 
   const renderCharacterCard = (data: Character) => (
-    <Link className={styles.link} key={data.id} to={`about_character/${data.id}`}>
+    <Link className={styles.link} key={data?.id} to={`about_character/${data?.id}`}>
       <div className={`${pathname === '/' ? styles.card : styles.miniCard}`}>
         <div className={styles.characterInfo}>
-          <h2 className={`${pathname === '/' ? styles.title : styles.miniTitle}`}>{data.name}</h2>
-          <div className={styles.characteristic}>Status: {data.status}</div>
-          <div className={styles.characteristic}>Species: {data.species}</div>
-          <div className={styles.characteristic}>Gender: {data.gender}</div>
+          <h2 className={`${pathname === '/' ? styles.title : styles.miniTitle}`}>{data?.name}</h2>
+          <div className={styles.characteristic}>Weight: {data?.weight}</div>
+          <div className={styles.characteristic}>Species: {data?.species}</div>
         </div>
-        <img className={styles.characterImage} src={data.image} alt={data.name} />
+        <img className={styles.characterImage} src={data?.sprites} alt={data?.name} />
       </div>
     </Link>
   );
@@ -38,15 +78,11 @@ const CardBlock: React.FC<Props> = ({ rickAndMortyData }) => {
     return <Loader />;
   }
 
-  if (!rickAndMortyData) {
+  if (!pokemonData) {
     return <NotFound />;
   }
 
-  return (
-    <div className={styles.wrapper}>
-      {rickAndMortyData.results?.map((data) => renderCharacterCard(data))}
-    </div>
-  );
+  return <div className={styles.wrapper}>{pokemons?.map((data) => renderCharacterCard(data))}</div>;
 };
 
 export default CardBlock;

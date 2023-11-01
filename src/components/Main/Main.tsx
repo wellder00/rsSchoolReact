@@ -9,16 +9,12 @@ import teleportTop from '../../assets/images/teleportTop.png';
 import teleportBottom from '../../assets/images/teleportBottom.png';
 
 type Props = {
-  rickAndMortyData: Info<Character> | null;
+  pokemonData: Info<Character> | null;
 };
 
-const Main: React.FC<Props> = ({ rickAndMortyData }) => {
+const Main: React.FC<Props> = ({ pokemonData }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const count = rickAndMortyData?.info?.count;
-  const nextPage = rickAndMortyData?.info?.next;
-  const prevPage = rickAndMortyData?.info?.prev;
-  console.log(count, nextPage, prevPage);
 
   function handleBack() {
     if (pathname !== '/') {
@@ -31,9 +27,9 @@ const Main: React.FC<Props> = ({ rickAndMortyData }) => {
       <img className={styles.teleportTop} src={teleportTop} alt="teleportTop" />
       <div className={styles.infoAndCardWrap}>
         <div onClick={handleBack} className={styles.wrapCard}>
-          <CardBlock rickAndMortyData={rickAndMortyData} />
+          <CardBlock pokemonData={pokemonData} />
         </div>
-        {rickAndMortyData && <Outlet />}
+        {pokemonData && <Outlet />}
       </div>
       <img className={styles.teleportBottom} src={teleportBottom} alt="teleportBottom" />
     </div>

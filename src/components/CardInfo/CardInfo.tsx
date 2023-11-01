@@ -1,18 +1,18 @@
+import { Suspense } from 'react';
 import { useLoaderData, Link, LoaderFunction, defer, Await } from 'react-router-dom';
 
 import styles from './CardInfo.module.scss';
 
 import { Character } from '../../types/interfaces';
-import { RickAndMortyAPI } from '../../utils/constants/api';
+import { pokemonAPI } from '../../utils/constants/api';
 import { Button } from '@components/Button';
-import { Suspense } from 'react';
 import { Loader } from '@components/Loader';
 
 async function getCharacter(id: number) {
   if (!id || typeof id !== 'number') {
     throw new Error('Invalid character ID');
   }
-  const response = await fetch(`${RickAndMortyAPI}/${id}`);
+  const response = await fetch(`${pokemonAPI}/${id}`);
   if (!response.ok) {
     throw new Error('ERROR HTTP: ' + response.status);
   }
