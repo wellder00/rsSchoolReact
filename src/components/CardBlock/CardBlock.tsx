@@ -7,23 +7,23 @@ import styles from './CardBlock.module.scss';
 import { Loader } from '../Loader';
 import { NotFound } from '../NotFound';
 
-import { Character, Info } from '../../types/interfaces';
+import { Info, Person, Pokemon, PokemonData } from '../../types/interfaces';
 
 type Props = {
-  pokemonData: Info<Character> | null;
+  pokemonData: Info<Person> | PokemonData | null;
 };
 
 const CardBlock: React.FC<Props> = ({ pokemonData }) => {
   const [loading, setLoading] = useState(true);
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
+  console.log(pokemons);
   const { pathname } = useLocation();
 
   async function getPokemon() {
-    if (!pokemonData.results) {
+    if (pokemonData === null) {
       return;
-    } else if (pokemonData.results) {
-      console.log(pokemonData.results);
-      const requests = pokemonData.results.map(async (person) => {
+    } else if ('results' in pokemonData) {
+      const requests = pokemonData.results.map(async (person: Person) => {
         try {
           if (person.url) {
             const response = await axios.get(person.url);
@@ -49,6 +49,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
         }
       });
       const responses = await Promise.all(requests);
+
       setPokemons(responses);
     }
   }
@@ -61,7 +62,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
     fetchData();
   }, [pokemonData]);
 
-  const renderCharacterCard = (data: Character) => (
+  const renderCharacterCard = (data: Pokemon | null | undefined) => (
     <Link className={styles.link} key={data?.id} to={`about_character/${data?.id}`}>
       <div className={`${pathname === '/' ? styles.card : styles.miniCard}`}>
         <div className={styles.characterInfo}>

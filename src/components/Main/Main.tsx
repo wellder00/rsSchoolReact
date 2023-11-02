@@ -4,12 +4,12 @@ import styles from './Main.module.scss';
 
 import { CardBlock } from '../CardBlock';
 
-import { Character, Info } from '../../types/interfaces';
 import teleportTop from '../../assets/images/teleportTop.png';
 import teleportBottom from '../../assets/images/teleportBottom.png';
+import { Info, Person, PokemonData } from 'types/interfaces';
 
 type Props = {
-  pokemonData: Info<Character> | null;
+  pokemonData: Info<Person> | PokemonData | null;
 };
 
 const Main: React.FC<Props> = ({ pokemonData }) => {
