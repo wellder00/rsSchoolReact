@@ -7,7 +7,6 @@ import { Info, Person, PokemonData } from 'types/interfaces';
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState<Info<Person> | PokemonData | null>(null);
-  console.log(pokemonData);
 
   useEffect(() => {
     async function fetchData(pokemon: string) {

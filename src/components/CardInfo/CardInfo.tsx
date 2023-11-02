@@ -50,11 +50,13 @@ const CardInfo = () => {
                 <div className={styles.blockInfo}>
                   <div>Weight: {person.weight}</div>
                   <div>Species: {person.species.name}</div>
-                  <ul>
-                    {person.stats.map((stats: stats) => (
-                      <li key={stats.stat.name}>{`${stats.stat.name}: ${stats.base_stat}`}</li>
-                    ))}
-                  </ul>
+                  <div className={styles.listWrap}>
+                    <ul className={styles.list}>
+                      {person.stats.map((stats: stats) => (
+                        <li key={stats.stat.name}>{`${stats.stat.name}: ${stats.base_stat}`}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
                 <img
                   className={styles.image}

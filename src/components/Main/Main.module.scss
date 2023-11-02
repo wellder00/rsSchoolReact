@@ -13,6 +13,7 @@
 
 .infoAndCardWrap {
   display: flex;
+  width: 100%;
   max-width: 1200px;
   padding: 0 15px;
 }
@@ -22,8 +23,6 @@
   padding: 20px 0;
   flex: 2;
 }
-
-
 
 .teleportTop {
   width: 300px;

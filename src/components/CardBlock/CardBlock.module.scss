@@ -8,7 +8,8 @@
   padding: 0 15px;
 }
 
-.card, .miniCard {
+.card,
+.miniCard {
   background: $card-color;
   width: 250px;
   padding: 10px;
@@ -34,7 +35,6 @@
 .miniCard {
   width: 150px;
 }
-
 
 .card-inner {
   width: 100%;
@@ -64,7 +64,8 @@
   transform: rotateY(180deg);
 }
 
-.title, .miniTitle {
+.title,
+.miniTitle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -91,5 +92,5 @@
 .link {
   text-decoration: none;
   color: inherit;
-  cursor: pointer; 
+  cursor: pointer;
 }

@@ -31,8 +31,20 @@
 }
 
 .image {
+  width: 300px;
   border-radius: 15px;
-  @media(max-width: 1000px) {
+  @media (max-width: 1000px) {
     width: 200px;
   }
+}
+
+.listWrap {
+  display: flex;
+  justify-content: center;
+}
+
+.list {
+  list-style: none;
+  text-align: start;
+  padding: 0 4px;
 }

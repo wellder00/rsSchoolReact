@@ -16,7 +16,6 @@ type Props = {
 const CardBlock: React.FC<Props> = ({ pokemonData }) => {
   const [loading, setLoading] = useState(true);
   const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
-  console.log(pokemons);
   const { pathname } = useLocation();
 
   async function getPokemon() {
@@ -57,7 +56,9 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
   useEffect(() => {
     async function fetchData() {
       await getPokemon();
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 700);
     }
     fetchData();
   }, [pokemonData]);
