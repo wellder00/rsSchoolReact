@@ -7,6 +7,7 @@ import { Info, Person, PokemonData } from 'types/interfaces';
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState<Info<Person> | PokemonData | null>(null);
+  const [selectedValue, setSelectedValue] = useState('option1');
 
   useEffect(() => {
     async function fetchData(pokemon: string) {
@@ -39,9 +40,16 @@ const Home = () => {
     }
   };
 
+  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    setSelectedValue(event.target.value);
+
   return (
     <div className={styles.wrapper}>
-      <Header findCharacter={findCharacter} />
+      <Header
+        findCharacter={findCharacter}
+        onSelectChange={onSelectChange}
+        selectedValue={selectedValue}
+      />
       <Main pokemonData={pokemonData} />
     </div>
   );

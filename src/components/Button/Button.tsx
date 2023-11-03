@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
 type Props = {
-  children: string;
-  className?: string;
+  children: string | ReactNode;
+  className: string;
   onClickFunction?: () => void;
 };
 

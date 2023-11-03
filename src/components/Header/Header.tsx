@@ -10,9 +10,11 @@ import logo from '../../assets/images/logo.png';
 
 type Props = {
   findCharacter: (selectedCategory: string) => void;
+  onSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  selectedValue: string;
 };
 
-const Header: React.FC<Props> = ({ findCharacter }) => {
+const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue }) => {
   const [inputValue, setInputValue] = useState('');
   const [hasError, setHasError] = useState(false);
 
@@ -45,6 +47,11 @@ const Header: React.FC<Props> = ({ findCharacter }) => {
     <div className={styles.wrapper}>
       <img className={styles.titleImg} src={title} alt="title" />
       <div className={styles.searchWrap}>
+        <select onChange={onSelectChange} className={styles.select} value={selectedValue}>
+          <option value="option1">10</option>
+          <option value="option2">20</option>
+          <option value="option3">30</option>
+        </select>
         <InputSearch
           className={'search'}
           placeholder={'search'}

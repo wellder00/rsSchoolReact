@@ -7,6 +7,7 @@ import { CardBlock } from '../CardBlock';
 import teleportTop from '../../assets/images/teleportTop.png';
 import teleportBottom from '../../assets/images/teleportBottom.png';
 import { Info, Person, PokemonData } from 'types/interfaces';
+import { Pagination } from '@components/Pagination';
 
 type Props = {
   pokemonData: Info<Person> | PokemonData | null;
@@ -25,6 +26,7 @@ const Main: React.FC<Props> = ({ pokemonData }) => {
   return (
     <div className={styles.wrapper}>
       <img className={styles.teleportTop} src={teleportTop} alt="teleportTop" />
+      <Pagination />
       <div className={styles.infoAndCardWrap}>
         <div onClick={handleBack} className={styles.wrapCard}>
           <CardBlock pokemonData={pokemonData} />

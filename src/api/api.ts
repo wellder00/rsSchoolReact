@@ -4,6 +4,7 @@ import { pokemonAPI } from '../utils/constants/api';
 
 export async function getPokemon(pokemon: string, offset?: number, limit?: number) {
   try {
+    console.log(offset, limit);
     if (pokemon === '') {
       console.log(offset, limit);
       localStorage.setItem('pokemon', JSON.stringify(pokemon));

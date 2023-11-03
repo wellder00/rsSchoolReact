@@ -1,34 +1,36 @@
 @import '../../styles/variables.scss';
 
 .wrapper {
-  position: relative;
   display: flex;
+  position: relative;
   flex: 1;
+  flex-direction: column;
   justify-content: center;
-  background: $bg-main-color;
-  color: #fff;
-  width: 100%;
+  align-items: center;
   box-sizing: border-box;
+  background: $bg-main-color;
+  width: 100%;
+  color: #fff;
 }
 
 .infoAndCardWrap {
   display: flex;
+  padding: 0 15px;
   width: 100%;
   max-width: 1200px;
-  padding: 0 15px;
 }
 
 .wrapCard {
-  max-width: 1200px;
-  padding: 20px 0;
   flex: 2;
+  padding: 20px 0;
+  max-width: 1200px;
 }
 
 .teleportTop {
-  width: 300px;
   position: absolute;
-  left: 15px;
   top: 40px;
+  left: 15px;
+  width: 300px;
   @media (max-width: 1780px) {
     width: 200px;
   }
@@ -38,10 +40,10 @@
 }
 
 .teleportBottom {
-  width: 300px;
   position: absolute;
   right: 15px;
   bottom: 40px;
+  width: 300px;
   @media (max-width: 1780px) {
     width: 200px;
   }

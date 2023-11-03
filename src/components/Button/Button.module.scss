@@ -43,3 +43,18 @@
     background-color: #0e5c99;
   }
 }
+
+.arrow {
+  width: 60px;
+  height: 60px; 
+  border-radius: 100%;
+  background-color: rgb(248,211,38);
+  filter: drop-shadow(0 0 20px red);
+  &:hover {
+    background-color: rgb(231, 191, 10);
+  }
+
+  &:active {
+    background-color: rgb(197, 164, 20);
+  }
+}
