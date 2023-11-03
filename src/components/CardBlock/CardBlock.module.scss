@@ -10,18 +10,18 @@
 
 .card,
 .miniCard {
-  background: $card-color;
-  width: 250px;
-  padding: 10px;
-  border: 1px solid green;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
   perspective: 1000px;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid green;
+  border-radius: 15px;
+  background: $card-color;
+  padding: 10px;
+  width: 250px;
+  text-align: center;
 
   &:hover {
     transform: scale(1.05) rotateY(180deg);
@@ -37,15 +37,15 @@
 }
 
 .card-inner {
-  width: 100%;
-  height: 100%;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
   transform-style: preserve-3d;
   transition: transform 0.5s;
+  width: 100%;
+  height: 100%;
 }
 
 .card:hover .card-inner {
@@ -53,11 +53,11 @@
 }
 
 .card-back {
-  transform: rotateY(180deg);
   position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
 }
 
 .card-back {
@@ -66,10 +66,10 @@
 
 .title,
 .miniTitle {
-  white-space: nowrap;
+  margin: 10px 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 10px 0;
+  white-space: nowrap;
 }
 
 .miniTitle {
@@ -81,8 +81,8 @@
 }
 
 .characterImage {
-  width: 100%;
   border-radius: 15px;
+  width: 100%;
 }
 
 .characteristic {
@@ -90,7 +90,7 @@
 }
 
 .link {
-  text-decoration: none;
-  color: inherit;
   cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 }
