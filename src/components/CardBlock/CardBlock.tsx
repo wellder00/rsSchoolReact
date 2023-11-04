@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 import styles from './CardBlock.module.scss';
@@ -17,6 +17,10 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
   const [loading, setLoading] = useState(true);
   const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
   const { pathname } = useLocation();
+  const [searchParams] = useSearchParams();
+  const initialValueLimit = searchParams.get('limit');
+  const initialValueOffset = searchParams.get('offset');
+  const initialValuePage = searchParams.get('page');
 
   async function getPokemon() {
     if (pokemonData === null) {
@@ -64,7 +68,11 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
   }, [pokemonData]);
 
   const renderCharacterCard = (data: Pokemon | null | undefined) => (
-    <Link className={styles.link} key={data?.id} to={`about_character/${data?.id}`}>
+    <Link
+      className={styles.link}
+      key={data?.id}
+      to={`about_character/${data?.id}?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`}
+    >
       <div className={`${pathname === '/' ? styles.card : styles.miniCard}`}>
         <div className={styles.characterInfo}>
           <h2 className={`${pathname === '/' ? styles.title : styles.miniTitle}`}>{data?.name}</h2>

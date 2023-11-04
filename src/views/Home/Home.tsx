@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import styles from './Home.module.scss';
 
@@ -16,9 +16,24 @@ interface Pages {
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState<Info<Person> | PokemonData | null>(null);
-  const [selectedValue, setSelectedValue] = useState('10');
   const [searchParams, setSearchParams] = useSearchParams();
-  const [pages, setPages] = useState<Pages>({ offset: 0, currentPage: 1, lastPage: 1 });
+  const initialValueLimit = searchParams.get('limit') || 10;
+  const initialValueOffset = searchParams.get('offset') || 0;
+  const initialValuePage = searchParams.get('page') || 1;
+  const [selectedValue, setSelectedValue] = useState(initialValueLimit);
+  const [pages, setPages] = useState<Pages>({
+    offset: +initialValueOffset,
+    currentPage: +initialValuePage,
+    lastPage: 1,
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (searchParams.get('limit') !== selectedValue) {
+      setSearchParams({ limit: '' + selectedValue, offset: '0', page: '1' });
+      setPages({ ...pages, currentPage: 1, offset: 0 });
+    }
+  }, [selectedValue]);
 
   useEffect(() => {
     async function fetchData(pokemon: string, offset: number, limit: number) {
@@ -29,11 +44,12 @@ const Home = () => {
         console.error(error);
       }
     }
-    if (!searchParams.has('limit') && !searchParams.has('offset')) {
-      setSearchParams({ limit: selectedValue, offset: '' + pages.offset });
-    }
 
-    setSearchParams({ limit: selectedValue, offset: '' + pages.offset });
+    setSearchParams({
+      limit: '' + selectedValue,
+      offset: '' + pages.offset,
+      page: '' + pages.currentPage,
+    });
     fetchData('', pages.offset, +selectedValue);
   }, [selectedValue, pages]);
 
@@ -63,6 +79,7 @@ const Home = () => {
     try {
       const data = await getPokemon(character);
       setPokemonData(data);
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
@@ -78,7 +95,7 @@ const Home = () => {
       const lastPage = Math.ceil(pokemonData.count / +limit);
       const newOffset = parseInt(offset) - parseInt(limit);
       const currentPage = Math.floor(newOffset / +limit) + 1;
-      // if (currentPage < 1) return
+      if (currentPage < 1) return;
       setPages({ currentPage, lastPage, offset: newOffset });
     }
   };
@@ -90,7 +107,7 @@ const Home = () => {
       const lastPage = Math.ceil(pokemonData.count / +limit);
       const newOffset = parseInt(offset) + parseInt(limit);
       const currentPage = Math.floor(newOffset / +limit) + 1;
-      // if (currentPage === lastPage) return
+      if (currentPage === lastPage) return;
       setPages({ currentPage, lastPage, offset: newOffset });
     }
   };

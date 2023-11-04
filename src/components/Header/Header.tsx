@@ -11,7 +11,7 @@ import logo from '../../assets/images/logo.png';
 type Props = {
   findCharacter: (selectedCategory: string) => void;
   onSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  selectedValue: string;
+  selectedValue: number | string;
 };
 
 const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue }) => {

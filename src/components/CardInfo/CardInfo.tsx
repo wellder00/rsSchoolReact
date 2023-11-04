@@ -1,5 +1,12 @@
 import { Suspense } from 'react';
-import { useLoaderData, Link, LoaderFunction, defer, Await } from 'react-router-dom';
+import {
+  useLoaderData,
+  Link,
+  LoaderFunction,
+  defer,
+  Await,
+  useSearchParams,
+} from 'react-router-dom';
 import axios from 'axios';
 
 import styles from './CardInfo.module.scss';
@@ -39,6 +46,10 @@ interface stats {
 
 const CardInfo = () => {
   const { character } = useLoaderData() as CharacterData;
+  const [searchParams] = useSearchParams();
+  const initialValueLimit = searchParams.get('limit');
+  const initialValueOffset = searchParams.get('offset');
+  const initialValuePage = searchParams.get('page');
   return (
     <div className={styles.characterInfo}>
       <div className={styles.infoWrap}>
@@ -64,7 +75,9 @@ const CardInfo = () => {
                   alt="image person"
                 />
                 <div>
-                  <Link to={'/'}>
+                  <Link
+                    to={`/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`}
+                  >
                     <Button className={'backButton'}>Back</Button>
                   </Link>
                 </div>

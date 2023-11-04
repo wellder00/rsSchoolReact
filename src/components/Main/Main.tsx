@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 
 import styles from './Main.module.scss';
 
@@ -24,10 +24,16 @@ const Main: React.FC<Props> = ({
 }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialValueLimit = searchParams.get('limit');
+  const initialValueOffset = searchParams.get('offset');
+  const initialValuePage = searchParams.get('page');
 
   function handleBack() {
     if (pathname !== '/') {
-      navigate('/');
+      navigate(
+        `/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`
+      );
     }
   }
 
