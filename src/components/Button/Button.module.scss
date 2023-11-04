@@ -1,11 +1,11 @@
 .button {
   cursor: pointer;
-  font-size: 20px;
-  font-family: 'Metal Mania', sans-serif;
-  padding: 10px 20px;
-  color: #fff;
   border: none;
   border-radius: 5px;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 20px;
+  font-family: 'Metal Mania', sans-serif;
 }
 
 .search {
@@ -41,20 +41,5 @@
 
   &:active {
     background-color: #0e5c99;
-  }
-}
-
-.arrow {
-  width: 60px;
-  height: 60px; 
-  border-radius: 100%;
-  background-color: rgb(248,211,38);
-  filter: drop-shadow(0 0 20px red);
-  &:hover {
-    background-color: rgb(231, 191, 10);
-  }
-
-  &:active {
-    background-color: rgb(197, 164, 20);
   }
 }

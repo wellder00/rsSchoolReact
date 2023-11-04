@@ -11,9 +11,17 @@ import { Pagination } from '@components/Pagination';
 
 type Props = {
   pokemonData: Info<Person> | PokemonData | null;
+  onChangePrevPage: () => void;
+  onChangeNextPage: () => void;
+  currentPage: number;
 };
 
-const Main: React.FC<Props> = ({ pokemonData }) => {
+const Main: React.FC<Props> = ({
+  pokemonData,
+  onChangePrevPage,
+  onChangeNextPage,
+  currentPage,
+}) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -26,7 +34,11 @@ const Main: React.FC<Props> = ({ pokemonData }) => {
   return (
     <div className={styles.wrapper}>
       <img className={styles.teleportTop} src={teleportTop} alt="teleportTop" />
-      <Pagination />
+      <Pagination
+        onChangePrevPage={onChangePrevPage}
+        onChangeNextPage={onChangeNextPage}
+        currentPage={currentPage}
+      />
       <div className={styles.infoAndCardWrap}>
         <div onClick={handleBack} className={styles.wrapCard}>
           <CardBlock pokemonData={pokemonData} />

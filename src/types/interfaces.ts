@@ -3,6 +3,7 @@ export interface PokemonData {
   weight: number;
   species: string;
   sprites: string;
+  count: number;
 }
 
 export interface Person {
@@ -20,7 +21,7 @@ export interface Pokemon extends Omit<Person, 'species' | 'sprites'> {
 }
 
 export interface Info<T> {
-  count: string;
+  count: number;
   next: string | null;
   previous: string | null;
   results: T[];

@@ -48,9 +48,9 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue 
       <img className={styles.titleImg} src={title} alt="title" />
       <div className={styles.searchWrap}>
         <select onChange={onSelectChange} className={styles.select} value={selectedValue}>
-          <option value="option1">10</option>
-          <option value="option2">20</option>
-          <option value="option3">30</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
         </select>
         <InputSearch
           className={'search'}

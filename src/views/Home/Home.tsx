@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-// useSearchParams,
+import { useSearchParams } from 'react-router-dom';
 
 import styles from './Home.module.scss';
 
@@ -9,18 +8,34 @@ import { getPokemon } from '../../api/api';
 import { Main } from '../../components/Main';
 import { Info, Person, PokemonData } from 'types/interfaces';
 
+interface Pages {
+  offset: number;
+  currentPage: number;
+  lastPage: number;
+}
+
 const Home = () => {
   const [pokemonData, setPokemonData] = useState<Info<Person> | PokemonData | null>(null);
-  const [selectedValue, setSelectedValue] = useState('option1');
-  // const [searchParams, setSearchParams] = useSearchParams();
-  const path = useLocation();
-  const pathName = path.pathname;
+  const [selectedValue, setSelectedValue] = useState('10');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pages, setPages] = useState<Pages>({ offset: 0, currentPage: 1, lastPage: 1 });
 
-  console.log(pathName);
+  useEffect(() => {
+    async function fetchData(pokemon: string, offset: number, limit: number) {
+      try {
+        const data = await getPokemon(pokemon, offset, limit);
+        setPokemonData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (!searchParams.has('limit') && !searchParams.has('offset')) {
+      setSearchParams({ limit: selectedValue, offset: '' + pages.offset });
+    }
 
-  // if (!searchParams.has('limit') || !searchParams.has('offset')) {
-  //   setSearchParams({ limit: '10', offset: '0' });
-  // }
+    setSearchParams({ limit: selectedValue, offset: '' + pages.offset });
+    fetchData('', pages.offset, +selectedValue);
+  }, [selectedValue, pages]);
 
   useEffect(() => {
     async function fetchData(pokemon: string) {
@@ -56,6 +71,32 @@ const Home = () => {
   const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
     setSelectedValue(event.target.value);
 
+  const onChangePrevPage = () => {
+    const limit = searchParams.get('limit');
+    const offset = searchParams.get('offset');
+    if (pokemonData?.count && limit && offset) {
+      const lastPage = Math.ceil(pokemonData.count / +limit);
+      const newOffset = parseInt(offset) - parseInt(limit);
+      const currentPage = Math.floor(newOffset / +limit) + 1;
+      // if (currentPage < 1) return
+      setPages({ currentPage, lastPage, offset: newOffset });
+    }
+  };
+
+  const onChangeNextPage = () => {
+    const limit = searchParams.get('limit');
+    const offset = searchParams.get('offset');
+    if (pokemonData?.count && limit && offset) {
+      const lastPage = Math.ceil(pokemonData.count / +limit);
+      const newOffset = parseInt(offset) + parseInt(limit);
+      const currentPage = Math.floor(newOffset / +limit) + 1;
+      // if (currentPage === lastPage) return
+      setPages({ currentPage, lastPage, offset: newOffset });
+    }
+  };
+
+  console.log(pages);
+
   return (
     <div className={styles.wrapper}>
       <Header
@@ -63,7 +104,12 @@ const Home = () => {
         onSelectChange={onSelectChange}
         selectedValue={selectedValue}
       />
-      <Main pokemonData={pokemonData} />
+      <Main
+        pokemonData={pokemonData}
+        onChangePrevPage={onChangePrevPage}
+        onChangeNextPage={onChangeNextPage}
+        currentPage={pages.currentPage}
+      />
     </div>
   );
 };

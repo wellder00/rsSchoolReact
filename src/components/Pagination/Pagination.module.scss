@@ -11,3 +11,26 @@
 .rightArrow {
   transform: rotate(180deg);
 }
+
+.arrow {
+  filter: drop-shadow(0 0 20px red);
+  cursor: pointer;
+  border-radius: 100%;
+  background-color: rgb(248, 211, 38);
+  width: 60px;
+  height: 60px;
+  &:hover {
+    background-color: rgb(231, 191, 10);
+  }
+
+  &:active {
+    background-color: rgb(197, 164, 20);
+  }
+}
+
+.disabled {
+  border-radius: 100%;
+  background-color: grey;
+  width: 60px;
+  height: 60px;
+}

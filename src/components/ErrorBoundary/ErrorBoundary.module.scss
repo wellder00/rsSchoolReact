@@ -1,10 +1,10 @@
 .wrapper {
   box-sizing: border-box;
-  height: 100vh;
-  text-align: center;
-  padding: 40px 15px;
-  font-family: 'Nosifer', sans-serif;
   background: linear-gradient(0deg, #040100, #d67a09, #bf9056);
+  padding: 40px 15px;
+  height: 100vh;
+  font-family: 'Nosifer', sans-serif;
+  text-align: center;
   @media (max-width: 700px) {
     font-size: 12px;
   }
@@ -22,13 +22,13 @@
 }
 
 .button {
-  width: 300px;
-  padding: 10px;
-  cursor: pointer;
   animation: pulse 2s infinite;
-  background-color: #4caf50;
-  color: #fff;
+  cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #4caf50;
+  padding: 10px;
+  width: 300px;
+  color: #fff;
   &:hover {
     animation-play-state: paused;
   }
