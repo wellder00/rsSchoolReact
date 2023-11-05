@@ -16,6 +16,7 @@ import { Loader } from '@components/Loader';
 
 import { PokemonData } from '../../types/interfaces';
 import { pokemonAPI } from '../../utils/constants/api';
+import notFound from '../../assets/images/notFound.png';
 
 async function getPokemon(id: number) {
   if (!id || typeof id !== 'number') {
@@ -47,9 +48,10 @@ interface stats {
 const CardInfo = () => {
   const { character } = useLoaderData() as CharacterData;
   const [searchParams] = useSearchParams();
-  const initialValueLimit = searchParams.get('limit');
-  const initialValueOffset = searchParams.get('offset');
-  const initialValuePage = searchParams.get('page');
+  const initialValueLimit = searchParams.get('limit') || 10;
+  const initialValueOffset = searchParams.get('offset') || 0;
+  const initialValuePage = searchParams.get('page') || 1;
+  const url = `/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`;
   return (
     <div className={styles.characterInfo}>
       <div className={styles.infoWrap}>
@@ -71,13 +73,11 @@ const CardInfo = () => {
                 </div>
                 <img
                   className={styles.image}
-                  src={person?.sprites?.front_shiny}
+                  src={person?.sprites?.front_shiny || notFound}
                   alt="image person"
                 />
                 <div>
-                  <Link
-                    to={`/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`}
-                  >
+                  <Link to={url}>
                     <Button className={'backButton'}>Back</Button>
                   </Link>
                 </div>

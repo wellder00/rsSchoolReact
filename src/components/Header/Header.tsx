@@ -7,14 +7,16 @@ import { Button } from '../Button';
 
 import title from '../../assets/images/title.png';
 import logo from '../../assets/images/logo.png';
+import { Info, Person, PokemonData } from 'types/interfaces';
 
 type Props = {
   findCharacter: (selectedCategory: string) => void;
   onSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   selectedValue: number | string;
+  pokemonData: Info<Person> | PokemonData | null;
 };
 
-const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue }) => {
+const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue, pokemonData }) => {
   const [inputValue, setInputValue] = useState('');
   const [hasError, setHasError] = useState(false);
 
@@ -47,11 +49,13 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue 
     <div className={styles.wrapper}>
       <img className={styles.titleImg} src={title} alt="title" />
       <div className={styles.searchWrap}>
-        <select onChange={onSelectChange} className={styles.select} value={selectedValue}>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-        </select>
+        {pokemonData?.count && (
+          <select onChange={onSelectChange} className={styles.select} value={selectedValue}>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        )}
         <InputSearch
           className={'search'}
           placeholder={'search'}

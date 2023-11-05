@@ -6,13 +6,8 @@ import styles from './Home.module.scss';
 import { Header } from '../../components/Header';
 import { getPokemon } from '../../api/api';
 import { Main } from '../../components/Main';
-import { Info, Person, PokemonData } from 'types/interfaces';
-
-interface Pages {
-  offset: number;
-  currentPage: number;
-  lastPage: number;
-}
+import { Info, Pages, Person, PokemonData } from 'types/interfaces';
+import { ErrorBoundary } from '@components/ErrorBoundary';
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState<Info<Person> | PokemonData | null>(null);
@@ -24,16 +19,10 @@ const Home = () => {
   const [pages, setPages] = useState<Pages>({
     offset: +initialValueOffset,
     currentPage: +initialValuePage,
-    lastPage: 1,
+    lastPage: 2,
   });
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (searchParams.get('limit') !== selectedValue) {
-      setSearchParams({ limit: '' + selectedValue, offset: '0', page: '1' });
-      setPages({ ...pages, currentPage: 1, offset: 0 });
-    }
-  }, [selectedValue]);
+  const url = `/?limit=${initialValueLimit}&offset=0&page=1`;
 
   useEffect(() => {
     async function fetchData(pokemon: string, offset: number, limit: number) {
@@ -54,22 +43,22 @@ const Home = () => {
   }, [selectedValue, pages]);
 
   useEffect(() => {
-    async function fetchData(pokemon: string) {
-      try {
-        const data = await getPokemon(pokemon);
-        setPokemonData(data);
-      } catch (error) {
-        console.error(error);
-      }
+    if (searchParams.get('limit') !== selectedValue) {
+      setSearchParams({ limit: '' + selectedValue, offset: '0', page: '1' });
+      setPages({ ...pages, currentPage: 1, offset: 0 });
     }
+  }, [selectedValue]);
+
+  useEffect(() => {
+    async function fetchData(pokemon: string) {
+      const data = await getPokemon(pokemon);
+      setPokemonData(data);
+    }
+
     const storedData = localStorage.getItem('pokemon');
     if (storedData) {
-      try {
-        const parsedData = JSON.parse(storedData);
-        fetchData(parsedData);
-      } catch (error) {
-        console.error(error);
-      }
+      const parsedData = JSON.parse(storedData);
+      fetchData(parsedData);
     } else {
       fetchData('');
     }
@@ -79,7 +68,7 @@ const Home = () => {
     try {
       const data = await getPokemon(character);
       setPokemonData(data);
-      navigate('/');
+      navigate(url);
     } catch (error) {
       console.error(error);
     }
@@ -88,45 +77,30 @@ const Home = () => {
   const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
     setSelectedValue(event.target.value);
 
-  const onChangePrevPage = () => {
+  const onChangePage = (isNext: boolean) => {
     const limit = searchParams.get('limit');
     const offset = searchParams.get('offset');
     if (pokemonData?.count && limit && offset) {
       const lastPage = Math.ceil(pokemonData.count / +limit);
-      const newOffset = parseInt(offset) - parseInt(limit);
+      const offsetChange = isNext ? +limit : -limit;
+      const newOffset = parseInt(offset) + offsetChange;
       const currentPage = Math.floor(newOffset / +limit) + 1;
-      if (currentPage < 1) return;
+
       setPages({ currentPage, lastPage, offset: newOffset });
     }
   };
-
-  const onChangeNextPage = () => {
-    const limit = searchParams.get('limit');
-    const offset = searchParams.get('offset');
-    if (pokemonData?.count && limit && offset) {
-      const lastPage = Math.ceil(pokemonData.count / +limit);
-      const newOffset = parseInt(offset) + parseInt(limit);
-      const currentPage = Math.floor(newOffset / +limit) + 1;
-      if (currentPage === lastPage) return;
-      setPages({ currentPage, lastPage, offset: newOffset });
-    }
-  };
-
-  console.log(pages);
 
   return (
     <div className={styles.wrapper}>
-      <Header
-        findCharacter={findCharacter}
-        onSelectChange={onSelectChange}
-        selectedValue={selectedValue}
-      />
-      <Main
-        pokemonData={pokemonData}
-        onChangePrevPage={onChangePrevPage}
-        onChangeNextPage={onChangeNextPage}
-        currentPage={pages.currentPage}
-      />
+      <ErrorBoundary>
+        <Header
+          findCharacter={findCharacter}
+          onSelectChange={onSelectChange}
+          selectedValue={selectedValue}
+          pokemonData={pokemonData}
+        />
+      </ErrorBoundary>
+      <Main pokemonData={pokemonData} onChangePage={onChangePage} pages={pages} />
     </div>
   );
 };

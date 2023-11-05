@@ -26,3 +26,9 @@ export interface Info<T> {
   previous: string | null;
   results: T[];
 }
+
+export interface Pages {
+  offset: number;
+  currentPage: number;
+  lastPage: number;
+}

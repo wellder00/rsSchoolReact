@@ -7,6 +7,8 @@ import styles from './CardBlock.module.scss';
 import { Loader } from '../Loader';
 import { NotFound } from '../NotFound';
 
+import notFound from '../../assets/images/notFound.png';
+
 import { Info, Person, Pokemon, PokemonData } from '../../types/interfaces';
 
 type Props = {
@@ -59,10 +61,9 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       await getPokemon();
-      setTimeout(() => {
-        setLoading(false);
-      }, 700);
+      setLoading(false);
     }
     fetchData();
   }, [pokemonData]);
@@ -79,7 +80,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
           <div className={styles.characteristic}>Weight: {data?.weight}</div>
           <div className={styles.characteristic}>Species: {data?.species}</div>
         </div>
-        <img className={styles.characterImage} src={data?.sprites} alt={data?.name} />
+        <img className={styles.characterImage} src={data?.sprites || notFound} alt={data?.name} />
       </div>
     </Link>
   );
@@ -88,7 +89,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
     return <Loader />;
   }
 
-  if (!pokemonData) {
+  if (!pokemonData && !loading) {
     return <NotFound />;
   }
 
