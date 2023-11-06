@@ -9,10 +9,10 @@ import { NotFound } from '../NotFound';
 
 import notFound from '../../assets/images/notFound.png';
 
-import { Info, Person, Pokemon, PokemonData } from '../../types/interfaces';
+import { MyContextType, Person, Pokemon } from '../../types/interfaces';
 
 type Props = {
-  pokemonData: Info<Person> | PokemonData | null;
+  pokemonData: MyContextType;
 };
 
 const CardBlock: React.FC<Props> = ({ pokemonData }) => {

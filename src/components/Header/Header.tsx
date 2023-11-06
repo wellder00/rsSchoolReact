@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
+import { MyContextType } from 'types/interfaces';
 
 import styles from './Header.module.scss';
 
@@ -7,18 +9,21 @@ import { Button } from '../Button';
 
 import title from '../../assets/images/title.png';
 import logo from '../../assets/images/logo.png';
-import { Info, Person, PokemonData } from 'types/interfaces';
+import Context from '../../state/Context';
 
 type Props = {
   findCharacter: (selectedCategory: string) => void;
   onSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   selectedValue: number | string;
-  pokemonData: Info<Person> | PokemonData | null;
+  pokemonData: MyContextType;
 };
 
 const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue, pokemonData }) => {
   const [inputValue, setInputValue] = useState('');
   const [hasError, setHasError] = useState(false);
+
+  const PokemonDate = useContext(Context);
+  console.log(PokemonDate);
 
   useEffect(() => {
     const storedData = localStorage.getItem('character');

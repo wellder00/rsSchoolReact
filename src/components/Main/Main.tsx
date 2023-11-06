@@ -7,11 +7,11 @@ import { CardBlock } from '../CardBlock';
 
 import teleportTop from '../../assets/images/teleportTop.png';
 import teleportBottom from '../../assets/images/teleportBottom.png';
-import { Info, Pages, Person, PokemonData } from 'types/interfaces';
+import { MyContextType, Pages } from 'types/interfaces';
 import { Pagination } from '@components/Pagination';
 
 type Props = {
-  pokemonData: Info<Person> | PokemonData | null;
+  pokemonData: MyContextType;
   onChangePage: (value: boolean) => void;
   pages: Pages;
 };

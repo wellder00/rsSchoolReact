@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import Context from '../../state/Context';
+
 import styles from './Home.module.scss';
 
-import { Header } from '../../components/Header';
-import { getPokemon } from '../../api/api';
-import { Main } from '../../components/Main';
-import { Info, Pages, Person, PokemonData } from 'types/interfaces';
+import { Header } from '@components/Header';
+import { Main } from '@components/Main';
 import { ErrorBoundary } from '@components/ErrorBoundary';
 
+import { MyContextType, Pages } from 'types/interfaces';
+import { getPokemon } from '../../api/api';
+
 const Home = () => {
-  const [pokemonData, setPokemonData] = useState<Info<Person> | PokemonData | null>(null);
+  const [pokemonData, setPokemonData] = useState<MyContextType>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const initialValueLimit = searchParams.get('limit') || 10;
   const initialValueOffset = searchParams.get('offset') || 0;
@@ -24,28 +27,34 @@ const Home = () => {
   const navigate = useNavigate();
   const url = `/?limit=${initialValueLimit}&offset=0&page=1`;
 
-  useEffect(() => {
-    async function fetchData(pokemon: string, offset: number, limit: number) {
-      try {
-        const data = await getPokemon(pokemon, offset, limit);
-        setPokemonData(data);
-      } catch (error) {
-        console.error(error);
-      }
+  async function fetchData(pokemon: string, offset: number, limit: number) {
+    try {
+      const data = await getPokemon(pokemon, offset, limit);
+      setPokemonData(data);
+    } catch (error) {
+      console.error(error);
     }
-
+  }
+  useEffect(() => {
     setSearchParams({
       limit: '' + selectedValue,
       offset: '' + pages.offset,
       page: '' + pages.currentPage,
     });
     fetchData('', pages.offset, +selectedValue);
-  }, [selectedValue, pages]);
+  }, [pages]);
 
   useEffect(() => {
     if (searchParams.get('limit') !== selectedValue) {
       setSearchParams({ limit: '' + selectedValue, offset: '0', page: '1' });
       setPages({ ...pages, currentPage: 1, offset: 0 });
+    } else {
+      setSearchParams({
+        limit: '' + selectedValue,
+        offset: '' + pages.offset,
+        page: '' + pages.currentPage,
+      });
+      fetchData('', pages.offset, +selectedValue);
     }
   }, [selectedValue]);
 
@@ -91,17 +100,19 @@ const Home = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <ErrorBoundary>
-        <Header
-          findCharacter={findCharacter}
-          onSelectChange={onSelectChange}
-          selectedValue={selectedValue}
-          pokemonData={pokemonData}
-        />
-      </ErrorBoundary>
-      <Main pokemonData={pokemonData} onChangePage={onChangePage} pages={pages} />
-    </div>
+    <Context.Provider value={pokemonData}>
+      <div className={styles.wrapper}>
+        <ErrorBoundary>
+          <Header
+            findCharacter={findCharacter}
+            onSelectChange={onSelectChange}
+            selectedValue={selectedValue}
+            pokemonData={pokemonData}
+          />
+        </ErrorBoundary>
+        <Main pokemonData={pokemonData} onChangePage={onChangePage} pages={pages} />
+      </div>
+    </Context.Provider>
   );
 };
 

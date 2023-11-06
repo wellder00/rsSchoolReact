@@ -32,3 +32,5 @@ export interface Pages {
   currentPage: number;
   lastPage: number;
 }
+
+export type MyContextType = Info<Person> | PokemonData | null;
