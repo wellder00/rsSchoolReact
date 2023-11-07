@@ -1,33 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './InputSearch.module.scss';
+
+import inputValuePokemon from '../../state/ContextInputValue';
 
 type Props = {
   placeholder: string;
   className: string;
-  value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   getInputValue: () => void;
 };
 
-const InputSearch: React.FC<Props> = ({
-  placeholder,
-  className,
-  value,
-  onChange,
-  getInputValue,
-}) => {
+const InputSearch: React.FC<Props> = ({ placeholder, className, onChange, getInputValue }) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       getInputValue();
     }
   };
 
+  const inputData = useContext(inputValuePokemon);
+
   return (
     <input
       className={styles[className]}
       type="text"
       placeholder={placeholder}
-      value={value}
+      value={inputData}
       onChange={onChange}
       onKeyDown={handleKeyDown}
     />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 
 import styles from './Main.module.scss';
@@ -7,16 +7,16 @@ import { CardBlock } from '../CardBlock';
 
 import teleportTop from '../../assets/images/teleportTop.png';
 import teleportBottom from '../../assets/images/teleportBottom.png';
-import { MyContextType, Pages } from 'types/interfaces';
+import { Pages } from 'types/interfaces';
 import { Pagination } from '@components/Pagination';
+import pokemonDataContext from '../../state/ContextPokemonData';
 
 type Props = {
-  pokemonData: MyContextType;
   onChangePage: (value: boolean) => void;
   pages: Pages;
 };
 
-const Main: React.FC<Props> = ({ pokemonData, pages, onChangePage }) => {
+const Main: React.FC<Props> = ({ pages, onChangePage }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -24,6 +24,8 @@ const Main: React.FC<Props> = ({ pokemonData, pages, onChangePage }) => {
   const initialValueOffset = searchParams.get('offset') || 0;
   const initialValuePage = searchParams.get('page') || 1;
   const [showPagination, setShowPagination] = useState(false);
+
+  const PokemonDate = useContext(pokemonDataContext);
 
   const url = `/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`;
 
@@ -36,12 +38,12 @@ const Main: React.FC<Props> = ({ pokemonData, pages, onChangePage }) => {
   useEffect(() => {
     setShowPagination(false);
 
-    if (pokemonData && pokemonData.count) {
+    if (PokemonDate && PokemonDate.count) {
       setTimeout(() => {
         setShowPagination(true);
       }, 200);
     }
-  }, [pokemonData]);
+  }, [PokemonDate]);
 
   return (
     <div className={styles.wrapper}>
@@ -49,9 +51,9 @@ const Main: React.FC<Props> = ({ pokemonData, pages, onChangePage }) => {
       {showPagination && <Pagination onChangePage={onChangePage} pages={pages} />}
       <div className={styles.infoAndCardWrap}>
         <div onClick={handleBack} className={styles.wrapCard}>
-          <CardBlock pokemonData={pokemonData} />
+          <CardBlock />
         </div>
-        {pokemonData && <Outlet />}
+        {PokemonDate && <Outlet />}
       </div>
       <img className={styles.teleportBottom} src={teleportBottom} alt="teleportBottom" />
     </div>

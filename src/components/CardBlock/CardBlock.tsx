@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,13 +9,10 @@ import { NotFound } from '../NotFound';
 
 import notFound from '../../assets/images/notFound.png';
 
-import { MyContextType, Person, Pokemon } from '../../types/interfaces';
+import { Person, Pokemon } from '../../types/interfaces';
+import pokemonDataContext from '../../state/ContextPokemonData';
 
-type Props = {
-  pokemonData: MyContextType;
-};
-
-const CardBlock: React.FC<Props> = ({ pokemonData }) => {
+const CardBlock = () => {
   const [loading, setLoading] = useState(true);
   const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
   const { pathname } = useLocation();
@@ -23,12 +20,13 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
   const initialValueLimit = searchParams.get('limit');
   const initialValueOffset = searchParams.get('offset');
   const initialValuePage = searchParams.get('page');
+  const PokemonDate = useContext(pokemonDataContext);
 
   async function getPokemon() {
-    if (pokemonData === null) {
+    if (PokemonDate === null) {
       return;
-    } else if ('results' in pokemonData) {
-      const requests = pokemonData.results.map(async (person: Person) => {
+    } else if ('results' in PokemonDate) {
+      const requests = PokemonDate.results.map(async (person: Person) => {
         try {
           if (person.url) {
             const response = await axios.get(person.url);
@@ -66,7 +64,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
       setLoading(false);
     }
     fetchData();
-  }, [pokemonData]);
+  }, [PokemonDate]);
 
   const renderCharacterCard = (data: Pokemon | null | undefined) => (
     <Link
@@ -89,7 +87,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData }) => {
     return <Loader />;
   }
 
-  if (!pokemonData && !loading) {
+  if (!PokemonDate && !loading) {
     return <NotFound />;
   }
 

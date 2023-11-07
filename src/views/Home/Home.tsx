@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import Context from '../../state/Context';
+import pokemonDataContext from '../../state/ContextPokemonData';
 
 import styles from './Home.module.scss';
 
@@ -100,19 +100,18 @@ const Home = () => {
   };
 
   return (
-    <Context.Provider value={pokemonData}>
+    <pokemonDataContext.Provider value={pokemonData}>
       <div className={styles.wrapper}>
         <ErrorBoundary>
           <Header
             findCharacter={findCharacter}
             onSelectChange={onSelectChange}
             selectedValue={selectedValue}
-            pokemonData={pokemonData}
           />
         </ErrorBoundary>
-        <Main pokemonData={pokemonData} onChangePage={onChangePage} pages={pages} />
+        <Main onChangePage={onChangePage} pages={pages} />
       </div>
-    </Context.Provider>
+    </pokemonDataContext.Provider>
   );
 };
 
