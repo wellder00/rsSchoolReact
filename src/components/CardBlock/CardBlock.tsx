@@ -91,7 +91,11 @@ const CardBlock = () => {
     return <NotFound />;
   }
 
-  return <div className={styles.wrapper}>{pokemons?.map((data) => renderCharacterCard(data))}</div>;
+  return (
+    <div data-testid="card-wrapper" className={styles.wrapper}>
+      {pokemons?.map((data) => renderCharacterCard(data))}
+    </div>
+  );
 };
 
 export default CardBlock;

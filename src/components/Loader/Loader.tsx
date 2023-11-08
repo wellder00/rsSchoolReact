@@ -1,9 +1,11 @@
 import styles from './Loader.module.scss';
 
-const Loader = () => {
+const Loader: React.FC = () => {
   return (
     <div className={styles.loading}>
-      <div className={styles.loadingIcon}>Loading...</div>
+      <div className={styles.loadingIcon} data-testid="loading-icon">
+        Loading...
+      </div>
       <div className={styles.loader}>
         <div className={styles.loaderCircle}></div>
       </div>
