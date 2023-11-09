@@ -5,9 +5,7 @@
       "@/*": ["./src/*"],
       "@assets/*": ["./assets/*"],
       "@components/*": ["./components/*"],
-      "types": [
-        "vitest/globals"
-      ]
+      "types": ["vitest/globals"]
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

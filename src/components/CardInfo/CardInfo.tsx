@@ -53,7 +53,7 @@ const CardInfo = () => {
   const initialValuePage = searchParams.get('page') || 1;
   const url = `/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`;
   return (
-    <div className={styles.characterInfo}>
+    <div data-testid="card-info-wrapper" className={styles.characterInfo}>
       <div className={styles.infoWrap}>
         <Suspense fallback={<Loader />}>
           <Await resolve={character}>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, Link, useSearchParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import styles from './CardBlock.module.scss';
@@ -7,19 +7,15 @@ import styles from './CardBlock.module.scss';
 import { Loader } from '../Loader';
 import { NotFound } from '../NotFound';
 
-import notFound from '../../assets/images/notFound.png';
-
 import { Person, Pokemon } from '../../types/interfaces';
 import pokemonDataContext from '../../state/ContextPokemonData';
+import Card from '@components/Card/Card';
 
 const CardBlock = () => {
   const [loading, setLoading] = useState(true);
   const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
   const { pathname } = useLocation();
-  const [searchParams] = useSearchParams();
-  const initialValueLimit = searchParams.get('limit');
-  const initialValueOffset = searchParams.get('offset');
-  const initialValuePage = searchParams.get('page');
+
   const PokemonDate = useContext(pokemonDataContext);
 
   async function getPokemon() {
@@ -66,23 +62,6 @@ const CardBlock = () => {
     fetchData();
   }, [PokemonDate]);
 
-  const renderCharacterCard = (data: Pokemon | null | undefined) => (
-    <Link
-      className={styles.link}
-      key={data?.id}
-      to={`about_character/${data?.id}?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`}
-    >
-      <div className={`${pathname === '/' ? styles.card : styles.miniCard}`}>
-        <div className={styles.characterInfo}>
-          <h2 className={`${pathname === '/' ? styles.title : styles.miniTitle}`}>{data?.name}</h2>
-          <div className={styles.characteristic}>Weight: {data?.weight}</div>
-          <div className={styles.characteristic}>Species: {data?.species}</div>
-        </div>
-        <img className={styles.characterImage} src={data?.sprites || notFound} alt={data?.name} />
-      </div>
-    </Link>
-  );
-
   if (loading) {
     return <Loader />;
   }
@@ -93,7 +72,11 @@ const CardBlock = () => {
 
   return (
     <div data-testid="card-wrapper" className={styles.wrapper}>
-      {pokemons?.map((data) => renderCharacterCard(data))}
+      {pokemons?.map((data) => (
+        <div key={data?.id}>
+          <Card data={data} pathname={pathname} />
+        </div>
+      ))}
     </div>
   );
 };
