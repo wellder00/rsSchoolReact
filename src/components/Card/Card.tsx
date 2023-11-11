@@ -7,7 +7,7 @@ import styles from './Card.module.scss';
 
 type Props = {
   data: Pokemon | null | undefined;
-  pathname: string;
+  pathname?: string;
 };
 
 const Card: React.FC<Props> = ({ data, pathname }) => {

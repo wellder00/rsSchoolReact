@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/InputSearch/InputSearch.tsx</title>
+    <title>Code coverage report for src/components/Card/Card.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/InputSearch</a> InputSearch.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/Card</a> Card.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.23% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/34</span>
+                <span class='fraction'>33/33</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">25% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
+                <span class="quiet">Functions</span>
                 <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">88.23% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/34</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -96,8 +96,7 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -110,61 +109,59 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useContext } from 'react';
-import styles from './InputSearch.module.scss';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link, useSearchParams } from 'react-router-dom';
+import notFound from '../../assets/images/notFound.png';
+import React from 'react';
+import { Pokemon } from '../../types/interfaces';
 &nbsp;
-import inputValuePokemon from '../../state/ContextInputValue';
+import styles from './Card.module.scss';
 &nbsp;
 type Props = {
-  placeholder: string;
-  className: string;
-  onChange: (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; void;
-  getInputValue: () =&gt; void;
+  data: Pokemon | null | undefined;
+  pathname?: string;
 };
 &nbsp;
-const InputSearch: React.FC&lt;Props&gt; = ({ placeholder, className, onChange, getInputValue }) =&gt; {
-  const handleKeyDown = <span class="fstat-no" title="function not covered" >(event: React.KeyboardEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (event.key === 'Enter') {</span>
-<span class="cstat-no" title="statement not covered" >      getInputValue();</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-&nbsp;
-  const inputData = useContext(inputValuePokemon);
-&nbsp;
+const Card: React.FC&lt;Props&gt; = ({ data, pathname }) =&gt; {
+  const [searchParams] = useSearchParams();
+  const initialValueLimit = searchParams.get('limit');
+  const initialValueOffset = searchParams.get('offset');
+  const initialValuePage = searchParams.get('page');
+  const queryParams = `about_character/${data?.id}?limit=${initialValueLimit}&amp;offset=${initialValueOffset}&amp;page=${initialValuePage}`;
   return (
-    &lt;input
-      className={styles[className]}
-      type="text"
-      placeholder={placeholder}
-      value={inputData}
-      onChange={onChange}
-      onKeyDown={handleKeyDown}
-    /&gt;
+    &lt;Link className={styles.link} to={queryParams}&gt;
+      &lt;div className={`${pathname === <span class="branch-0 cbranch-no" title="branch not covered" >'/' ? styles.card : s</span>tyles.miniCard}`}&gt;
+        &lt;div className={styles.characterInfo}&gt;
+          &lt;h2 className={`${pathname === <span class="branch-0 cbranch-no" title="branch not covered" >'/' ? styles.title : s</span>tyles.miniTitle}`}&gt;{data?.name}&lt;/h2&gt;
+          &lt;div className={styles.characteristic}&gt;Weight: {data?.weight}&lt;/div&gt;
+          &lt;div className={styles.characteristic}&gt;Species: {data?.species}&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;img className={styles.characterImage} src={data?.<span class="branch-0 cbranch-no" title="branch not covered" >sprites || notFound} a</span>lt={data?.name} /&gt;
+      &lt;/div&gt;
+    &lt;/Link&gt;
   );
 };
 &nbsp;
-export default InputSearch;
+export default Card;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

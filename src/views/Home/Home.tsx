@@ -9,8 +9,8 @@ import { Header } from '@components/Header';
 import { Main } from '@components/Main';
 import { ErrorBoundary } from '@components/ErrorBoundary';
 
-import { MyContextType, Pages } from 'types/interfaces';
 import { getPokemon } from '../../api/api';
+import { MyContextType, Pages } from 'types/interfaces';
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState<MyContextType>(null);

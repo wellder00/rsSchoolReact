@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { CardBlock } from '../components/CardBlock';
+import { Home } from '../views/Home';
 
 describe('Tests for the Card component', () => {
-  it('Check that an appropriate message is displayed if no cards are present', () => {
+  it('Testing home page', () => {
     const { asFragment } = render(
       <MemoryRouter>
-        <CardBlock />
+        <Home />
       </MemoryRouter>
     );
 
