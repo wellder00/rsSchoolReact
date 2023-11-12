@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter, useNavigate } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Card } from '../components/Card';
-import { ditto } from './PokemonData';
+import { ditto } from './mocks/PokemonData';
 
 describe('Tests for the Card component', () => {
   it('Ensure that the card component renders the relevant card data;', () => {

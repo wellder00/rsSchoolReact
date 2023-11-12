@@ -43,6 +43,15 @@
     "react-hooks/exhaustive-deps": "off"
   },
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+        "project": "./tsconfig.json",
+        "extensions": [".ts", ".tsx"]
+      }
+    },
     "react": {
       "pragma": "React",
       "version": "detect"

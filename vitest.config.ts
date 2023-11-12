@@ -28,5 +28,6 @@ export default defineConfig({
         'src/**/data.ts',
       ],
     },
+    css: false,
   },
 });

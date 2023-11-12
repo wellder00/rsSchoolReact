@@ -21,25 +21,3 @@ exports[`Tests for the Card component > Check that an appropriate message is dis
   </div>
 </DocumentFragment>
 `;
-
-exports[`Tests for the Card component > Verify that the component renders the specified number of cards; 1`] = `
-<DocumentFragment>
-  <div
-    class="_loading_d51639"
-  >
-    <div
-      class="_loadingIcon_d51639"
-      data-testid="loading-icon"
-    >
-      Loading...
-    </div>
-    <div
-      class="_loader_d51639"
-    >
-      <div
-        class="_loaderCircle_d51639"
-      />
-    </div>
-  </div>
-</DocumentFragment>
-`;

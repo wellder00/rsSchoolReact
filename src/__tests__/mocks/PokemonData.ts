@@ -1,4 +1,4 @@
-import image from '../assets/images/teleportBottom.png';
+import image from '../../assets/images/teleportTop.png';
 export const ditto = {
   id: 8,
   name: 'ditto',
