@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-
 import { Home } from '../views/Home';
 
-test('Home Component - renders loading message initially', () => {
-  render(
-    <MemoryRouter>
-      <Home />
-    </MemoryRouter>
-  );
+describe('Tests for the Card component', () => {
+  it('Testing home page', () => {
+    const { asFragment } = render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    );
 
-  expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+    expect(asFragment()).toMatchSnapshot();
+    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+  });
 });

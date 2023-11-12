@@ -26,7 +26,6 @@ describe('Tests for the Card component', () => {
     const linkElement = container.querySelector('a');
     if (linkElement) {
       fireEvent.click(linkElement);
-      // expect(navigate).toHaveBeenCalledWith('/about_character/8?limit=null&offset=null&page=null')
     } else {
       throw new Error('Link element not found');
     }

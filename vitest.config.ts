@@ -26,6 +26,7 @@ export default defineConfig({
         'src/**/constants.ts',
         'src/**/interfaces.ts',
         'src/**/data.ts',
+        'src/**/CardInfo.tsx',
       ],
     },
     css: false,
