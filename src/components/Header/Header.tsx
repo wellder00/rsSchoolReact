@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useAppDispatch, useAppSelector } from '../../Hooks/reduxHooks';
 
 import styles from './Header.module.scss';
 
@@ -10,6 +11,8 @@ import logo from '../../assets/images/logo.png';
 import pokemonDataContext from '../../state/ContextPokemonData';
 import inputValuePokemon from '../../state/ContextInputValue';
 
+import { saveItemValue } from '../../store/pokemonSlice';
+
 type Props = {
   findCharacter: (selectedCategory: string) => void;
   onSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -17,6 +20,9 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue }) => {
+  const dispatch = useAppDispatch();
+  const selectedData = useAppSelector((state) => state.pokemon.value);
+  console.log(selectedData);
   const [inputValue, setInputValue] = useState('');
   const [hasError, setHasError] = useState(false);
 
@@ -32,6 +38,7 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue 
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
+    dispatch(saveItemValue(event.target.value));
   };
 
   const handleSearch = () => {
@@ -48,35 +55,35 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue 
   }
 
   return (
-    <inputValuePokemon.Provider value={inputValue}>
-      <div className={styles.wrapper}>
-        <img className={styles.titleImg} src={title} alt="title" />
-        <div className={styles.searchWrap}>
-          {PokemonDate?.count && (
-            <select onChange={onSelectChange} className={styles.select} value={selectedValue}>
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-            </select>
-          )}
+    <div className={styles.wrapper}>
+      <img className={styles.titleImg} src={title} alt="title" />
+      <div className={styles.searchWrap}>
+        {PokemonDate?.count && (
+          <select onChange={onSelectChange} className={styles.select} value={selectedValue}>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        )}
+        <inputValuePokemon.Provider value={inputValue}>
           <InputSearch
             className={'search'}
             placeholder={'search'}
             onChange={handleInputChange}
             getInputValue={handleSearch}
           />
+        </inputValuePokemon.Provider>
 
-          <Button className={'search'} onClickFunction={handleSearch}>
-            SEARCH
-          </Button>
+        <Button className={'search'} onClickFunction={handleSearch}>
+          SEARCH
+        </Button>
 
-          <Button className={'error'} onClickFunction={handleMakeError}>
-            TRY MAKE ERROR
-          </Button>
-        </div>
-        <img className={styles.logo} src={logo} alt="logo" />
+        <Button className={'error'} onClickFunction={handleMakeError}>
+          TRY MAKE ERROR
+        </Button>
       </div>
-    </inputValuePokemon.Provider>
+      <img className={styles.logo} src={logo} alt="logo" />
+    </div>
   );
 };
 

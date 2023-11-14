@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tests for the Card component > Ensure that the card component renders the relevant card data; 1`] = `
+<DocumentFragment>
+  <a
+    class="_link_d75732"
+    href="/about_character/8?limit=null&offset=null&page=null"
+  >
+    <div
+      class="_miniCard_d75732"
+    >
+      <div
+        class="_characterInfo_d75732"
+      >
+        <h2
+          class="_miniTitle_d75732"
+        >
+          ditto
+        </h2>
+        <div
+          class="_characteristic_d75732"
+        >
+          Weight: 40
+        </div>
+        <div
+          class="_characteristic_d75732"
+        >
+          Species: fire
+        </div>
+      </div>
+      <img
+        alt="ditto"
+        class="_characterImage_d75732"
+        src="/src/assets/images/teleportTop.png"
+      />
+    </div>
+  </a>
+</DocumentFragment>
+`;
