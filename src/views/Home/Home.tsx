@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import pokemonDataContext from '../../state/ContextPokemonData';
-
 import styles from './Home.module.scss';
+
+import pokemonDataContext from '../../state/ContextPokemonData';
+import { useAppDispatch, useAppSelector } from '../../Hooks/reduxHooks';
 
 import { Header } from '@components/Header';
 import { Main } from '@components/Main';
@@ -11,14 +12,16 @@ import { ErrorBoundary } from '@components/ErrorBoundary';
 
 import { getPokemon } from '../../api/api';
 import { MyContextType, Pages } from 'types/interfaces';
+import { changeItemsAmount } from '../../store/itemsPerPageSlice';
 
 const Home = () => {
+  const dispatch = useAppDispatch();
+  const itemsAmount = useAppSelector((state) => state.itemsAmount.items);
   const [pokemonData, setPokemonData] = useState<MyContextType>(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialValueLimit = searchParams.get('limit') || 10;
+  const initialValueLimit = searchParams.get('limit') || itemsAmount;
   const initialValueOffset = searchParams.get('offset') || 0;
   const initialValuePage = searchParams.get('page') || 1;
-  const [selectedValue, setSelectedValue] = useState(initialValueLimit);
   const [pages, setPages] = useState<Pages>({
     offset: +initialValueOffset,
     currentPage: +initialValuePage,
@@ -37,28 +40,29 @@ const Home = () => {
   }
   useEffect(() => {
     setSearchParams({
-      limit: '' + selectedValue,
+      limit: '' + itemsAmount,
       offset: '' + pages.offset,
       page: '' + pages.currentPage,
     });
-    fetchData('', pages.offset, +selectedValue);
+    fetchData('', pages.offset, +itemsAmount);
   }, [pages]);
 
   useEffect(() => {
-    if (searchParams.get('limit') !== selectedValue) {
-      setSearchParams({ limit: '' + selectedValue, offset: '0', page: '1' });
+    if (searchParams.get('limit') !== itemsAmount) {
+      setSearchParams({ limit: '' + itemsAmount, offset: '0', page: '1' });
       setPages({ ...pages, currentPage: 1, offset: 0 });
     } else {
       setSearchParams({
-        limit: '' + selectedValue,
+        limit: '' + itemsAmount,
         offset: '' + pages.offset,
         page: '' + pages.currentPage,
       });
-      fetchData('', pages.offset, +selectedValue);
+      fetchData('', pages.offset, +itemsAmount);
     }
-  }, [selectedValue]);
+  }, [itemsAmount]);
 
   useEffect(() => {
+    dispatch(changeItemsAmount(initialValueLimit));
     async function fetchData(pokemon: string) {
       const data = await getPokemon(pokemon);
       setPokemonData(data);
@@ -84,7 +88,7 @@ const Home = () => {
   };
 
   const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
-    setSelectedValue(event.target.value);
+    dispatch(changeItemsAmount(event.target.value));
 
   const onChangePage = (isNext: boolean) => {
     const limit = searchParams.get('limit');
@@ -103,11 +107,7 @@ const Home = () => {
     <pokemonDataContext.Provider value={pokemonData}>
       <div className={styles.wrapper}>
         <ErrorBoundary>
-          <Header
-            findCharacter={findCharacter}
-            onSelectChange={onSelectChange}
-            selectedValue={selectedValue}
-          />
+          <Header findCharacter={findCharacter} onSelectChange={onSelectChange} />
         </ErrorBoundary>
         <Main onChangePage={onChangePage} pages={pages} />
       </div>

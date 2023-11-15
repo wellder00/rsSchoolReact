@@ -9,7 +9,7 @@ const initialState: InputValueState = {
 };
 
 const pokemonSlice = createSlice({
-  name: 'pokemonName',
+  name: 'inputValue',
   initialState,
   reducers: {
     saveItemValue(state, action: PayloadAction<string>) {

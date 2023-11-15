@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './InputSearch.module.scss';
-
-import inputValuePokemon from '../../state/ContextInputValue';
+import { useAppSelector } from '../../Hooks/reduxHooks';
 
 type Props = {
   placeholder: string;
@@ -17,14 +16,14 @@ const InputSearch: React.FC<Props> = ({ placeholder, className, onChange, getInp
     }
   };
 
-  const inputData = useContext(inputValuePokemon);
+  const inputValue = useAppSelector((state) => state.inputValue.value);
 
   return (
     <input
       className={styles[className]}
       type="text"
       placeholder={placeholder}
-      value={inputData}
+      value={inputValue}
       onChange={onChange}
       onKeyDown={handleKeyDown}
     />

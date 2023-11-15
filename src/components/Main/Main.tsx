@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Outlet, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../../Hooks/reduxHooks';
 
 import styles from './Main.module.scss';
 
@@ -17,10 +18,12 @@ type Props = {
 };
 
 const Main: React.FC<Props> = ({ pages, onChangePage }) => {
+  const inputValue = useAppSelector((state) => state.itemsAmount.items);
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const initialValueLimit = searchParams.get('limit') || 10;
+  const initialValueLimit = searchParams.get('limit') || inputValue;
   const initialValueOffset = searchParams.get('offset') || 0;
   const initialValuePage = searchParams.get('page') || 1;
   const [showPagination, setShowPagination] = useState(false);
