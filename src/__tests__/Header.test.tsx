@@ -1,19 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Home } from '../views/Home';
+import { Header } from '../components/Header';
 
 describe('Tests for the Card component', () => {
   it('Testing home page', () => {
     const { asFragment } = render(
       <MemoryRouter>
-        <Home />
+        <Header findCharacter={() => ''} onSelectChange={() => ''} selectedValue={12} />
       </MemoryRouter>
     );
 
     expect(asFragment()).toMatchSnapshot();
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+    expect(screen.getByText(/TRY MAKE ERROR/i)).toBeInTheDocument();
     expect(screen.getByText(/SEARCH/i)).toBeInTheDocument();
-    expect(screen.getByAltText(/title/i)).toBeInTheDocument();
-    expect(screen.getByAltText(/teleportBottom/i)).toBeInTheDocument();
   });
 });

@@ -18,4 +18,9 @@ describe('Error page component', () => {
 
     expect(screen.getByRole('generic')).toBeInTheDocument();
   });
+  it('Show error page', () => {
+    const { asFragment } = render(<ErrorPage />);
+    expect(asFragment()).toMatchSnapshot();
+    expect(screen.getByText(/Oops!/i)).toBeInTheDocument();
+  });
 });

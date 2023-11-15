@@ -1,19 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Home } from '../views/Home';
+import { InputSearch } from '../components/InputSearch';
 
 describe('Tests for the Card component', () => {
   it('Testing home page', () => {
     const { asFragment } = render(
       <MemoryRouter>
-        <Home />
+        <InputSearch
+          placeholder={'text'}
+          className={'someClass'}
+          onChange={(e) => e}
+          getInputValue={() => ''}
+        />
       </MemoryRouter>
     );
 
     expect(asFragment()).toMatchSnapshot();
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
-    expect(screen.getByText(/SEARCH/i)).toBeInTheDocument();
-    expect(screen.getByAltText(/title/i)).toBeInTheDocument();
-    expect(screen.getByAltText(/teleportBottom/i)).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 });

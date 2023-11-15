@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useAppDispatch, useAppSelector } from '../../Hooks/reduxHooks';
+// import { useAppDispatch, useAppSelector } from '../../Hooks/reduxHooks';
 
 import styles from './Header.module.scss';
 
@@ -11,7 +11,7 @@ import logo from '../../assets/images/logo.png';
 import pokemonDataContext from '../../state/ContextPokemonData';
 import inputValuePokemon from '../../state/ContextInputValue';
 
-import { saveItemValue } from '../../store/pokemonSlice';
+// import { saveItemValue } from '../../store/pokemonSlice';
 
 type Props = {
   findCharacter: (selectedCategory: string) => void;
@@ -20,9 +20,9 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue }) => {
-  const dispatch = useAppDispatch();
-  const selectedData = useAppSelector((state) => state.pokemon.value);
-  console.log(selectedData);
+  // const dispatch = useAppDispatch();
+  // const selectedData = useAppSelector((state) => state.pokemon.value);
+  // console.log(selectedData);
   const [inputValue, setInputValue] = useState('');
   const [hasError, setHasError] = useState(false);
 
@@ -38,7 +38,7 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange, selectedValue 
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    dispatch(saveItemValue(event.target.value));
+    // dispatch(saveItemValue(event.target.value));
   };
 
   const handleSearch = () => {
