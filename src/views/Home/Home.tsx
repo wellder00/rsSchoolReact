@@ -13,11 +13,16 @@ import { ErrorBoundary } from '@components/ErrorBoundary';
 import { getPokemon } from '../../api/api';
 import { MyContextType, Pages } from 'types/interfaces';
 import { changeItemsAmount } from '../../store/itemsPerPageSlice';
+import { useGetPokemonsQuery } from '../../store/redux/pokemonApi';
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const itemsAmount = useAppSelector((state) => state.itemsAmount.items);
-  const [pokemonData, setPokemonData] = useState<MyContextType>(null);
+  const { data = [] } = useGetPokemonsQuery({ limit: itemsAmount, offset: '0' });
+
+  console.log(data);
+
+  const [pokemonData, setPokemonData] = useState<MyContextType>(data);
   const [searchParams, setSearchParams] = useSearchParams();
   const initialValueLimit = searchParams.get('limit') || itemsAmount;
   const initialValueOffset = searchParams.get('offset') || 0;
@@ -61,21 +66,21 @@ const Home = () => {
     }
   }, [itemsAmount]);
 
-  useEffect(() => {
-    dispatch(changeItemsAmount(initialValueLimit));
-    async function fetchData(pokemon: string) {
-      const data = await getPokemon(pokemon);
-      setPokemonData(data);
-    }
+  // useEffect(() => {
+  //   dispatch(changeItemsAmount(initialValueLimit));
+  //   async function fetchData(pokemon: string) {
+  //     const data = await getPokemon(pokemon);
+  //     setPokemonData(data);
+  //   }
 
-    const storedData = localStorage.getItem('pokemon');
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      fetchData(parsedData);
-    } else {
-      fetchData('');
-    }
-  }, []);
+  //   const storedData = localStorage.getItem('pokemon');
+  //   if (storedData) {
+  //     const parsedData = JSON.parse(storedData);
+  //     fetchData(parsedData);
+  //   } else {
+  //     fetchData('');
+  //   }
+  // }, []);
 
   const findCharacter = async (character: string) => {
     try {

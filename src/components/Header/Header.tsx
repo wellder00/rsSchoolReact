@@ -19,6 +19,7 @@ type Props = {
 const Header: React.FC<Props> = ({ findCharacter, onSelectChange }) => {
   const dispatch = useAppDispatch();
   const itemsAmount = useAppSelector((state) => state.itemsAmount.items);
+
   const inputValue = useAppSelector((state) => state.inputValue.value);
   const [hasError, setHasError] = useState(false);
   const PokemonDate = useContext(pokemonDataContext);
