@@ -1,16 +1,18 @@
-import React from 'react';
 import styles from './Pagination.module.scss';
 import arrow from '../../assets/images/arrow.png';
-import { Pages } from 'types/interfaces';
+import { useAppSelector } from '../../Hooks/reduxHooks';
 
 type Props = {
   onChangePage: (value: boolean) => void;
-  pages: Pages;
 };
 
-const Pagination: React.FC<Props> = ({ onChangePage, pages }) => {
-  const isPrevButtonDisabled = pages.currentPage <= 1;
-  const isNextButtonDisabled = pages.currentPage === pages.lastPage;
+const Pagination: React.FC<Props> = ({ onChangePage }) => {
+  const currentPage = useAppSelector((state) => state.itemsAmount.currentPage);
+  const lastPage = useAppSelector((state) => state.itemsAmount.lastPage);
+
+  const isPrevButtonDisabled = +currentPage <= 1;
+
+  const isNextButtonDisabled = +currentPage === +lastPage;
   const prevButtonClass = isPrevButtonDisabled ? styles.disabled : styles.arrow;
   const nextButtonClass = isNextButtonDisabled ? styles.disabled : styles.arrow;
 
@@ -24,7 +26,7 @@ const Pagination: React.FC<Props> = ({ onChangePage, pages }) => {
         <img className={styles.leftArrow} src={arrow} alt="leftArrow" />
       </button>
 
-      <span className={styles.currentPage}>{pages.currentPage}</span>
+      <span className={styles.currentPage}>{currentPage}</span>
 
       <button
         disabled={isNextButtonDisabled}

@@ -1,28 +1,29 @@
-import { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import styles from './CardBlock.module.scss';
 
 import { Loader } from '../Loader';
 import { NotFound } from '../NotFound';
 
-import { Person, Pokemon } from '../../types/interfaces';
-import pokemonDataContext from '../../state/ContextPokemonData';
 import Card from '@components/Card/Card';
+import { MyContextType, Person, Pokemon } from '../../types/interfaces';
 
-const CardBlock = () => {
-  const [loading, setLoading] = useState(true);
+type Props = {
+  pokemonData: MyContextType;
+  isLoading: boolean;
+};
+
+const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
   const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
   const { pathname } = useLocation();
 
-  const PokemonDate = useContext(pokemonDataContext);
-
   async function getPokemon() {
-    if (PokemonDate === null) {
+    if (pokemonData === null) {
       return;
-    } else if ('results' in PokemonDate) {
-      const requests = PokemonDate.results.map(async (person: Person) => {
+    } else if ('results' in pokemonData) {
+      const requests = pokemonData.results.map(async (person: Person) => {
         try {
           if (person.url) {
             const response = await axios.get(person.url);
@@ -54,19 +55,14 @@ const CardBlock = () => {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      await getPokemon();
-      setLoading(false);
-    }
-    fetchData();
-  }, [PokemonDate]);
+    getPokemon();
+  }, [pokemonData]);
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (!PokemonDate && !loading) {
+  if (!pokemonData && !isLoading) {
     return <NotFound />;
   }
 

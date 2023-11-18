@@ -1,22 +1,16 @@
-import { Suspense } from 'react';
-import {
-  useLoaderData,
-  Link,
-  LoaderFunction,
-  defer,
-  Await,
-  useSearchParams,
-} from 'react-router-dom';
 import axios from 'axios';
+import { Suspense } from 'react';
+import { Await, Link, LoaderFunction, defer, useLoaderData } from 'react-router-dom';
 
 import styles from './CardInfo.module.scss';
 
 import { Button } from '@components/Button';
 import { Loader } from '@components/Loader';
 
+import { useAppSelector } from '../../Hooks/reduxHooks';
+import notFound from '../../assets/images/notFound.png';
 import { PokemonData } from '../../types/interfaces';
 import { pokemonAPI } from '../../utils/constants/api';
-import notFound from '../../assets/images/notFound.png';
 
 async function getPokemon(id: number) {
   if (!id || typeof id !== 'number') {
@@ -47,11 +41,8 @@ interface stats {
 
 const CardInfo = () => {
   const { character } = useLoaderData() as CharacterData;
-  const [searchParams] = useSearchParams();
-  const initialValueLimit = searchParams.get('limit') || 10;
-  const initialValueOffset = searchParams.get('offset') || 0;
-  const initialValuePage = searchParams.get('page') || 1;
-  const url = `/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`;
+  const currentPage = useAppSelector((state) => state.itemsAmount.currentPage);
+  const url = `/?page=${currentPage}`;
   return (
     <div data-testid="card-info-wrapper" className={styles.characterInfo}>
       <div className={styles.infoWrap}>

@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type itemsAmountState = {
-  items: string;
+  itemsAmount: string;
+  offset: string;
+  currentPage: string;
+  lastPage: string;
 };
 
 const initialState: itemsAmountState = {
-  items: '10',
+  itemsAmount: '10',
+  offset: '0',
+  currentPage: '1',
+  lastPage: '',
 };
 
 const itemsAmountSlice = createSlice({
@@ -13,11 +19,21 @@ const itemsAmountSlice = createSlice({
   initialState,
   reducers: {
     changeItemsAmount(state, action: PayloadAction<string>) {
-      state.items = action.payload;
+      state.itemsAmount = action.payload;
+    },
+    changeOffsetAmount(state, action: PayloadAction<string>) {
+      state.offset = action.payload;
+    },
+    changeCurrentPage(state, action: PayloadAction<string>) {
+      state.currentPage = action.payload;
+    },
+    changeLastPage(state, action: PayloadAction<string>) {
+      state.currentPage = action.payload;
     },
   },
 });
 
-export const { changeItemsAmount } = itemsAmountSlice.actions;
+export const { changeItemsAmount, changeOffsetAmount, changeCurrentPage, changeLastPage } =
+  itemsAmountSlice.actions;
 
 export default itemsAmountSlice.reducer;

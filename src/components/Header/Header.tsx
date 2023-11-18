@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 
 import styles from './Header.module.scss';
 
-import { InputSearch } from '../InputSearch';
 import { Button } from '../Button';
+import { InputSearch } from '../InputSearch';
 
-import title from '../../assets/images/title.png';
-import logo from '../../assets/images/logo.png';
-import pokemonDataContext from '../../state/ContextPokemonData';
-import { saveItemValue } from '../../store/inputValueSlice';
 import { useAppDispatch, useAppSelector } from '../../Hooks/reduxHooks';
+import logo from '../../assets/images/logo.png';
+import title from '../../assets/images/title.png';
+import { saveItemValue } from '../../store/inputValueSlice';
 
 type Props = {
   findCharacter: (selectedCategory: string) => void;
@@ -18,20 +17,10 @@ type Props = {
 
 const Header: React.FC<Props> = ({ findCharacter, onSelectChange }) => {
   const dispatch = useAppDispatch();
-  const itemsAmount = useAppSelector((state) => state.itemsAmount.items);
+  const itemsAmount = useAppSelector((state) => state.itemsAmount.itemsAmount);
 
   const inputValue = useAppSelector((state) => state.inputValue.value);
   const [hasError, setHasError] = useState(false);
-  const PokemonDate = useContext(pokemonDataContext);
-
-  //!!! Проверить эту функцию
-  useEffect(() => {
-    const storedData = localStorage.getItem('character');
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      dispatch(saveItemValue(parsedData));
-    }
-  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(saveItemValue(event.target.value));
@@ -53,13 +42,11 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange }) => {
     <div className={styles.wrapper}>
       <img className={styles.titleImg} src={title} alt="title" />
       <div className={styles.searchWrap}>
-        {PokemonDate?.count && (
-          <select onChange={onSelectChange} className={styles.select} value={itemsAmount}>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-          </select>
-        )}
+        <select onChange={onSelectChange} className={styles.select} value={itemsAmount}>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
 
         <InputSearch
           className={'search'}
@@ -67,11 +54,9 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange }) => {
           onChange={handleInputChange}
           getInputValue={handleSearch}
         />
-
         <Button className={'search'} onClickFunction={handleSearch}>
           SEARCH
         </Button>
-
         <Button className={'error'} onClickFunction={handleMakeError}>
           TRY MAKE ERROR
         </Button>

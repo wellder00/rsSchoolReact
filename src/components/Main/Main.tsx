@@ -1,36 +1,35 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Outlet, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
-import { useAppSelector } from '../../Hooks/reduxHooks';
+import React from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../Hooks/reduxHooks';
 
 import styles from './Main.module.scss';
 
 import { CardBlock } from '../CardBlock';
 
-import teleportTop from '../../assets/images/teleportTop.png';
-import teleportBottom from '../../assets/images/teleportBottom.png';
-import { Pages } from 'types/interfaces';
 import { Pagination } from '@components/Pagination';
-import pokemonDataContext from '../../state/ContextPokemonData';
+import teleportBottom from '../../assets/images/teleportBottom.png';
+import teleportTop from '../../assets/images/teleportTop.png';
+import {
+  changeCurrentPage,
+  changeLastPage,
+  changeOffsetAmount,
+} from '../../store/itemsPerPageSlice';
+import { useGetPokemonsQuery } from '../../store/redux/pokemonApi';
 
-type Props = {
-  onChangePage: (value: boolean) => void;
-  pages: Pages;
-};
-
-const Main: React.FC<Props> = ({ pages, onChangePage }) => {
-  const inputValue = useAppSelector((state) => state.itemsAmount.items);
-
+const Main: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const itemsAmount = useAppSelector((state) => state.itemsAmount.itemsAmount);
+  const currentPage = useAppSelector((state) => state.itemsAmount.currentPage);
+  const offset = useAppSelector((state) => state.itemsAmount.offset);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const initialValueLimit = searchParams.get('limit') || inputValue;
-  const initialValueOffset = searchParams.get('offset') || 0;
-  const initialValuePage = searchParams.get('page') || 1;
-  const [showPagination, setShowPagination] = useState(false);
 
-  const PokemonDate = useContext(pokemonDataContext);
+  const { data = [], isLoading } = useGetPokemonsQuery({
+    limit: itemsAmount,
+    offset: offset,
+  });
 
-  const url = `/?limit=${initialValueLimit}&offset=${initialValueOffset}&page=${initialValuePage}`;
+  const url = `/?page=${currentPage}`;
 
   function handleBack() {
     if (pathname !== '/') {
@@ -38,25 +37,28 @@ const Main: React.FC<Props> = ({ pages, onChangePage }) => {
     }
   }
 
-  useEffect(() => {
-    setShowPagination(false);
-
-    if (PokemonDate && PokemonDate.count) {
-      setTimeout(() => {
-        setShowPagination(true);
-      }, 200);
+  const onChangePage = (isNext: boolean) => {
+    const limit = itemsAmount;
+    if (data?.count && limit && offset) {
+      const lastPage = Math.ceil(data.count / +limit);
+      const offsetChange = isNext ? +limit : -limit;
+      const newOffset = parseInt(offset) + offsetChange;
+      const currentPage = Math.floor(newOffset / +limit) + 1;
+      dispatch(changeOffsetAmount('' + newOffset));
+      dispatch(changeLastPage('' + lastPage));
+      dispatch(changeCurrentPage('' + currentPage));
     }
-  }, [PokemonDate]);
+  };
 
   return (
     <div className={styles.wrapper}>
       <img className={styles.teleportTop} src={teleportTop} alt="teleportTop" />
-      {showPagination && <Pagination onChangePage={onChangePage} pages={pages} />}
+      <Pagination onChangePage={onChangePage} />
       <div className={styles.infoAndCardWrap}>
         <div onClick={handleBack} className={styles.wrapCard}>
-          <CardBlock />
+          <CardBlock pokemonData={data} isLoading={isLoading} />
         </div>
-        {PokemonDate && <Outlet />}
+        {data && <Outlet />}
       </div>
       <img className={styles.teleportBottom} src={teleportBottom} alt="teleportBottom" />
     </div>
