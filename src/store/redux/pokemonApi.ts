@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { pokemonAPI1 } from '../../utils/constants/api';
+import { pokemonAPI } from '../../utils/constants/api';
 
 export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: pokemonAPI1 }),
+  baseQuery: fetchBaseQuery({ baseUrl: pokemonAPI }),
   endpoints: (build) => ({
     getPokemons: build.query({
       query: ({ pokemon = '', limit = '', offset = '' }) => {
@@ -13,7 +13,7 @@ export const pokemonApi = createApi({
       },
     }),
     getPokemon: build.query({
-      query: (id) => `pokemon/${id && `limit=${id}`}`,
+      query: (id) => `pokemon/${id}`,
     }),
   }),
 });

@@ -15,6 +15,14 @@ export interface Person {
   sprites?: { front_shiny: string };
 }
 
+export interface PokemonApiResponse {
+  id: number;
+  name: string;
+  weight: number;
+  species?: { name: string };
+  sprites?: { front_shiny: string };
+}
+
 export interface Pokemon extends Omit<Person, 'species' | 'sprites'> {
   species?: string;
   sprites?: string;
@@ -33,4 +41,4 @@ export interface Pages {
   lastPage: number;
 }
 
-export type MyContextType = Info<Person> | PokemonData | null;
+export type MyContextType = Info<Person> | PokemonData | null | PokemonApiResponse;

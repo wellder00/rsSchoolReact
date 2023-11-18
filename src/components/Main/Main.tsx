@@ -55,7 +55,7 @@ const Main: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <img className={styles.teleportTop} src={teleportTop} alt="teleportTop" />
-      <Pagination onChangePage={onChangePage} />
+      {data?.count && <Pagination onChangePage={onChangePage} />}
       <div className={styles.infoAndCardWrap}>
         <div onClick={handleBack} className={styles.wrapCard}>
           <CardBlock pokemonData={data} isLoading={isLoading} />

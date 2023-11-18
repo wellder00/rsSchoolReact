@@ -19,7 +19,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
   const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
   const { pathname } = useLocation();
 
-  async function getPokemon() {
+  async function getPokemon(): Promise<void> {
     if (pokemonData === null) {
       return;
     }
@@ -44,12 +44,12 @@ const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
       const responses = await Promise.all(requests);
       setPokemons(responses);
     } else if ('id' in pokemonData) {
-      const data = {
+      const data: Pokemon = {
         id: pokemonData?.id as number,
         name: pokemonData?.name,
         weight: pokemonData?.weight,
-        // species: pokemonData?.species?.name,
-        // sprites: pokemonData?.sprites?.front_shiny,
+        species: pokemonData?.species?.name,
+        sprites: pokemonData?.sprites?.front_shiny,
       };
       setPokemons([data]);
     }
