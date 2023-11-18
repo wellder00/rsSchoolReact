@@ -11,29 +11,30 @@ import title from '../../assets/images/title.png';
 import { saveItemValue } from '../../store/inputValueSlice';
 
 type Props = {
-  findCharacter: (selectedCategory: string) => void;
   onSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const Header: React.FC<Props> = ({ findCharacter, onSelectChange }) => {
+const Header: React.FC<Props> = ({ onSelectChange }) => {
   const dispatch = useAppDispatch();
   const itemsAmount = useAppSelector((state) => state.itemsAmount.itemsAmount);
 
   const inputValue = useAppSelector((state) => state.inputValue.value);
   const [hasError, setHasError] = useState(false);
+  const [pokemonName, setPokemonName] = useState(inputValue);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(saveItemValue(event.target.value));
+    setPokemonName(event.target.value);
   };
 
   const handleSearch = () => {
-    findCharacter(inputValue);
-    dispatch(saveItemValue(''));
+    dispatch(saveItemValue(pokemonName));
+    setPokemonName('');
   };
 
   const handleMakeError = () => {
     setHasError(true);
   };
+
   if (hasError) {
     throw new Error('Everything is broken, everything is destroyed');
   }
@@ -53,6 +54,7 @@ const Header: React.FC<Props> = ({ findCharacter, onSelectChange }) => {
           placeholder={'search'}
           onChange={handleInputChange}
           getInputValue={handleSearch}
+          pokemonName={pokemonName}
         />
         <Button className={'search'} onClickFunction={handleSearch}>
           SEARCH

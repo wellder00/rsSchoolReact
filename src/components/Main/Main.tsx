@@ -20,11 +20,13 @@ const Main: React.FC = () => {
   const dispatch = useAppDispatch();
   const itemsAmount = useAppSelector((state) => state.itemsAmount.itemsAmount);
   const currentPage = useAppSelector((state) => state.itemsAmount.currentPage);
+  const inputValue = useAppSelector((state) => state.inputValue.value);
   const offset = useAppSelector((state) => state.itemsAmount.offset);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const { data = [], isLoading } = useGetPokemonsQuery({
+    pokemon: inputValue,
     limit: itemsAmount,
     offset: offset,
   });

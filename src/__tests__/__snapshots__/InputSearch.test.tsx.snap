@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tests for the Card component > Testing home page 1`] = `
+<DocumentFragment>
+  <input
+    class="_someClass_823600"
+    placeholder="text"
+    type="text"
+    value=""
+  />
+</DocumentFragment>
+`;

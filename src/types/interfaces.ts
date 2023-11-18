@@ -16,8 +16,8 @@ export interface Person {
 }
 
 export interface Pokemon extends Omit<Person, 'species' | 'sprites'> {
-  species: string;
-  sprites: string;
+  species?: string;
+  sprites?: string;
 }
 
 export interface Info<T> {

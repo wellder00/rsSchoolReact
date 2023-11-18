@@ -6,10 +6,16 @@ export const pokemonApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: pokemonAPI1 }),
   endpoints: (build) => ({
     getPokemons: build.query({
-      query: ({ limit = '', offset = '' }) =>
-        `pokemon?${limit && `limit=${limit}`}&${offset && `offset=${offset}`}`,
+      query: ({ pokemon = '', limit = '', offset = '' }) => {
+        if (pokemon) {
+          return `pokemon/${pokemon}`;
+        } else return `pokemon/?${limit && `limit=${limit}`}&${offset && `offset=${offset}`}`;
+      },
+    }),
+    getPokemon: build.query({
+      query: (id) => `pokemon/${id && `limit=${id}`}`,
     }),
   }),
 });
 
-export const { useGetPokemonsQuery } = pokemonApi;
+export const { useGetPokemonsQuery, useGetPokemonQuery } = pokemonApi;

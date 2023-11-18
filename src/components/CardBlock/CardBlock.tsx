@@ -22,7 +22,8 @@ const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
   async function getPokemon() {
     if (pokemonData === null) {
       return;
-    } else if ('results' in pokemonData) {
+    }
+    if ('results' in pokemonData) {
       const requests = pokemonData.results.map(async (person: Person) => {
         try {
           if (person.url) {
@@ -34,14 +35,6 @@ const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
               species: response?.data?.species?.name,
               sprites: response?.data?.sprites?.front_shiny,
             };
-          } else if (person.id) {
-            return {
-              id: person?.id,
-              name: person?.name,
-              weight: person?.weight,
-              species: person?.species?.name,
-              sprites: person?.sprites?.front_shiny,
-            };
           }
         } catch (error) {
           console.error('Request ERROR:', error);
@@ -49,8 +42,16 @@ const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
         }
       });
       const responses = await Promise.all(requests);
-
       setPokemons(responses);
+    } else if ('id' in pokemonData) {
+      const data = {
+        id: pokemonData?.id as number,
+        name: pokemonData?.name,
+        weight: pokemonData?.weight,
+        // species: pokemonData?.species?.name,
+        // sprites: pokemonData?.sprites?.front_shiny,
+      };
+      setPokemons([data]);
     }
   }
 
