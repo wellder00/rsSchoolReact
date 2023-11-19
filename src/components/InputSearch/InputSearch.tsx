@@ -24,10 +24,11 @@ const InputSearch: React.FC<Props> = ({
 
   return (
     <input
+      data-testid="input-test-id"
       className={styles[className]}
       type="text"
       placeholder={placeholder}
-      value={pokemonName}
+      value={pokemonName || ''}
       onChange={onChange}
       onKeyDown={handleKeyDown}
     />

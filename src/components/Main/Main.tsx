@@ -25,7 +25,11 @@ const Main: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const { data = [], isLoading } = useGetPokemonsQuery({
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useGetPokemonsQuery({
     pokemon: inputValue,
     limit: itemsAmount,
     offset: offset,
@@ -58,7 +62,7 @@ const Main: React.FC = () => {
       {data?.count && <Pagination onChangePage={onChangePage} />}
       <div className={styles.infoAndCardWrap}>
         <div onClick={handleBack} className={styles.wrapCard}>
-          <CardBlock pokemonData={data} isLoading={isLoading} />
+          <CardBlock pokemonData={data} isLoading={isLoading} isError={isError} />
         </div>
         {data && <Outlet />}
       </div>

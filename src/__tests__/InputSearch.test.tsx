@@ -1,21 +1,25 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { InputSearch } from '../components/InputSearch';
+import { ChangeEvent } from 'react';
+import '@testing-library/jest-dom';
 
-describe('Tests for the Card component', () => {
-  it('Testing home page', () => {
-    const { asFragment } = render(
-      <MemoryRouter>
-        <InputSearch
-          placeholder={'text'}
-          className={'someClass'}
-          onChange={(e) => e}
-          getInputValue={() => ''}
-        />
-      </MemoryRouter>
+describe('InputSearch', () => {
+  test('renders InputSearch component', () => {
+    const component = render(
+      <InputSearch
+        placeholder={''}
+        className={''}
+        pokemonName={''}
+        onChange={function (event: ChangeEvent<HTMLInputElement>): void {
+          throw new Error('Function not implemented.');
+        }}
+        getInputValue={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
     );
-
-    expect(asFragment()).toMatchSnapshot();
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(component).toMatchSnapshot();
+    expect(screen.getByPlaceholderText('')).toBeInTheDocument();
+    expect(screen.getByTestId('input-test-id')).toBeInTheDocument();
   });
 });

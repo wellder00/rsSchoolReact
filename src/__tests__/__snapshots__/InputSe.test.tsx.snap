@@ -7,7 +7,6 @@ exports[`InputSearch renders InputSearch component 1`] = `
     <div>
       <input
         class=""
-        data-testid="input-test-id"
         placeholder=""
         type="text"
         value=""
@@ -17,7 +16,6 @@ exports[`InputSearch renders InputSearch component 1`] = `
   "container": <div>
     <input
       class=""
-      data-testid="input-test-id"
       placeholder=""
       type="text"
       value=""

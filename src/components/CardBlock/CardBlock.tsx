@@ -13,9 +13,10 @@ import { MyContextType, Person, Pokemon } from '../../types/interfaces';
 type Props = {
   pokemonData: MyContextType;
   isLoading: boolean;
+  isError: boolean;
 };
 
-const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
+const CardBlock: React.FC<Props> = ({ pokemonData, isLoading, isError }) => {
   const [pokemons, setPokemons] = useState<(Pokemon | null | undefined)[]>([]);
   const { pathname } = useLocation();
 
@@ -63,7 +64,7 @@ const CardBlock: React.FC<Props> = ({ pokemonData, isLoading }) => {
     return <Loader />;
   }
 
-  if (!pokemonData && !isLoading) {
+  if (isError) {
     return <NotFound />;
   }
 

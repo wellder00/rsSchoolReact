@@ -28,7 +28,7 @@ const itemsAmountSlice = createSlice({
       state.currentPage = action.payload;
     },
     changeLastPage(state, action: PayloadAction<string>) {
-      state.currentPage = action.payload;
+      state.lastPage = action.payload;
     },
   },
 });
