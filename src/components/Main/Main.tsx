@@ -6,7 +6,7 @@ import styles from './Main.module.scss';
 
 import { CardBlock } from '../CardBlock';
 
-import { Pagination } from '@components/Pagination';
+import { Pagination } from '../../components/Pagination';
 import teleportBottom from '../../assets/images/teleportBottom.png';
 import teleportTop from '../../assets/images/teleportTop.png';
 import {

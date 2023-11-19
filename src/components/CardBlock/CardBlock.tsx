@@ -7,7 +7,7 @@ import styles from './CardBlock.module.scss';
 import { Loader } from '../Loader';
 import { NotFound } from '../NotFound';
 
-import Card from '@components/Card/Card';
+import Card from '../../components/Card/Card';
 import { MyContextType, Person, Pokemon } from '../../types/interfaces';
 
 type Props = {

@@ -2,9 +2,9 @@ import { useSearchParams } from 'react-router-dom';
 
 import styles from './Home.module.scss';
 
-import { ErrorBoundary } from '@components/ErrorBoundary';
-import { Header } from '@components/Header';
-import { Main } from '@components/Main';
+import { ErrorBoundary } from '../../components/ErrorBoundary';
+import { Header } from '../../components/Header';
+import { Main } from '../../components/Main';
 
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../Hooks/reduxHooks';
