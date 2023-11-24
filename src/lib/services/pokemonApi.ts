@@ -1,10 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { HYDRATE } from 'next-redux-wrapper';
 
 const pokemonAPI = process.env.API_URL;
 
 export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
   baseQuery: fetchBaseQuery({ baseUrl: pokemonAPI }),
+
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
+  tagTypes: [],
+
   endpoints: (build) => ({
     getPokemons: build.query({
       query: ({ pokemon = '', limit = '', offset = '' }) => {
@@ -19,4 +28,10 @@ export const pokemonApi = createApi({
   }),
 });
 
-export const { useGetPokemonsQuery, useGetPokemonQuery } = pokemonApi;
+export const {
+  useGetPokemonsQuery,
+  useGetPokemonQuery,
+  util: { getRunningQueriesThunk },
+} = pokemonApi;
+
+export const { getPokemons, getPokemon } = pokemonApi.endpoints;

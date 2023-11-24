@@ -1,12 +1,9 @@
 import styles from './Pagination.module.scss';
-// import arrow from '../../assets/images/arrow.png';
+import arrow from '../../../public/assets/images/arrow.png';
 import { useAppSelector } from '@/lib/redux/hooks/reduxHooks';
+import Image from 'next/image';
 
-type Props = {
-  onChangePage: (value: boolean) => void;
-};
-
-const Pagination: React.FC<Props> = ({ onChangePage }) => {
+const Pagination = () => {
   const currentPage = useAppSelector((state) => state.itemsAmount.currentPage);
   const lastPage = useAppSelector((state) => state.itemsAmount.lastPage);
 
@@ -20,20 +17,20 @@ const Pagination: React.FC<Props> = ({ onChangePage }) => {
     <div className={styles.wrapper}>
       <button
         disabled={isPrevButtonDisabled}
-        onClick={() => onChangePage(false)}
+        // onClick={() => onChangePage(false)}
         className={prevButtonClass}
       >
-        <img className={styles.leftArrow} src={'arrow'} alt="leftArrow" />
+        <Image width={50} height={50} className={styles.leftArrow} src={arrow} alt="leftArrow" />
       </button>
 
       <span className={styles.currentPage}>{currentPage}</span>
 
       <button
         disabled={isNextButtonDisabled}
-        onClick={() => onChangePage(true)}
+        // onClick={() => onChangePage(true)}
         className={nextButtonClass}
       >
-        <img className={styles.rightArrow} src={'arrow'} alt="rightArrow" />
+        <Image width={50} height={50} className={styles.rightArrow} src={arrow} alt="rightArrow" />
       </button>
     </div>
   );

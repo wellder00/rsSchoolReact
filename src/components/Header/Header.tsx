@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-
+import Image from 'next/image';
 import styles from './Header.module.scss';
 
 import { Button } from '../Button';
 import { InputSearch } from '../InputSearch';
 
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks/reduxHooks';
-// import logo from '../../../public/assets/images/logo.png';
-// import title from '../../../public/assets/images/title.png';
+import logo from '../../../public/assets/images/logo.png';
+import title from '../../../public/assets/images/title.png';
 import { saveItemValue } from '@/lib//redux/slices/inputValueSlice';
 
 type Props = {
@@ -41,7 +41,8 @@ const Header: React.FC<Props> = ({ onSelectChange }) => {
 
   return (
     <div className={styles.wrapper}>
-      <img className={styles.titleImg} src={'title'} alt="title" />
+      <Image className={styles.titleImg} src={logo} alt="title" width={100} height={100} />
+
       <div className={styles.searchWrap}>
         <select onChange={onSelectChange} className={styles.select} value={itemsAmount}>
           <option value="10">10</option>
@@ -63,7 +64,7 @@ const Header: React.FC<Props> = ({ onSelectChange }) => {
           TRY MAKE ERROR
         </Button>
       </div>
-      <img className={styles.logo} src={'logo'} alt="logo" />
+      <Image className={styles.logo} src={title} alt="title" width={200} height={100} />
     </div>
   );
 };

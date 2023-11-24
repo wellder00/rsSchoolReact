@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  background: $bg-main-color;
+  
   width: 100%;
   color: #fff;
 }
@@ -24,33 +24,7 @@
   max-width: 1200px;
 }
 
-.teleportTop {
-  position: absolute;
-  top: 40px;
-  left: 15px;
-  filter: drop-shadow(0 0 20px red);
-  width: 300px;
-  @media (max-width: 1780px) {
-    width: 200px;
-  }
-  @media (max-width: 1605px) {
-    display: none;
-  }
-}
 
-.teleportBottom {
-  position: absolute;
-  right: 15px;
-  bottom: 40px;
-  filter: drop-shadow(0 0 20px red);
-  width: 300px;
-  @media (max-width: 1780px) {
-    width: 200px;
-  }
-  @media (max-width: 1605px) {
-    display: none;
-  }
-}
 
 .none {
   border-color: grey;

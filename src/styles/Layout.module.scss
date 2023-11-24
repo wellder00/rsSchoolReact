@@ -1,0 +1,34 @@
+@import '../styles//variables.scss';
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-main-color;
+}
+
+.teleportTop {
+  position: absolute;
+  top: 40px;
+  left: 15px;
+  filter: drop-shadow(0 0 20px red);
+  @media (max-width: 1780px) {
+    width: 200px;
+  }
+  @media (max-width: 1605px) {
+    display: none;
+  }
+}
+
+.teleportBottom {
+  position: absolute;
+  right: 15px;
+  bottom: 40px;
+  filter: drop-shadow(0 0 20px red);
+  @media (max-width: 1780px) {
+    width: 200px;
+  }
+  @media (max-width: 1605px) {
+    display: none;
+  }
+}

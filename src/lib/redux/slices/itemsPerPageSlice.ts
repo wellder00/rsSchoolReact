@@ -5,6 +5,7 @@ type itemsAmountState = {
   offset: string;
   currentPage: string;
   lastPage: string;
+  count: string;
 };
 
 const initialState: itemsAmountState = {
@@ -12,6 +13,7 @@ const initialState: itemsAmountState = {
   offset: '0',
   currentPage: '1',
   lastPage: '',
+  count: '',
 };
 
 const itemsAmountSlice = createSlice({
@@ -30,10 +32,18 @@ const itemsAmountSlice = createSlice({
     changeLastPage(state, action: PayloadAction<string>) {
       state.lastPage = action.payload;
     },
+    changeCount(state, action: PayloadAction<string>) {
+      state.count = action.payload;
+    },
   },
 });
 
-export const { changeItemsAmount, changeOffsetAmount, changeCurrentPage, changeLastPage } =
-  itemsAmountSlice.actions;
+export const {
+  changeItemsAmount,
+  changeOffsetAmount,
+  changeCurrentPage,
+  changeLastPage,
+  changeCount,
+} = itemsAmountSlice.actions;
 
 export default itemsAmountSlice.reducer;
