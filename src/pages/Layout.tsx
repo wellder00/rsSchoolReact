@@ -7,6 +7,7 @@ import Image from 'next/image';
 import teleportBottom from '../../public/assets/images/teleportBottom.png';
 import teleportTop from '../../public/assets/images/teleportTop.png';
 import styles from '../styles/Layout.module.scss';
+import { useEffect } from 'react';
 
 type Props = {
   children?: React.ReactNode;
@@ -16,8 +17,11 @@ type Props = {
 
 const Layout: React.FC<Props> = ({ children, pokemons, count }) => {
   const dispatch = useAppDispatch();
-  dispatch(savePokemons(pokemons));
-  dispatch(changeCount('' + count));
+
+  useEffect(() => {
+    dispatch(savePokemons(pokemons));
+    dispatch(changeCount('' + count));
+  }, [dispatch, pokemons, count]);
 
   return (
     <div className={styles.wrapper}>

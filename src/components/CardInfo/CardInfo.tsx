@@ -7,13 +7,18 @@ import { Pokemon, stats } from '@/types/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../Button';
+import { useAppSelector } from '@/lib/redux/hooks/reduxHooks';
+import { useRouter } from 'next/router';
 
 type Props = {
   pokemonData: Pokemon;
 };
 
 const CardInfo: React.FC<Props> = ({ pokemonData }) => {
-  console.log(pokemonData);
+  const router = useRouter();
+  const itemsAmount = useAppSelector((state) => state.itemsAmount.itemsAmount);
+  const offset = router.query.offset || 0;
+  const currentPage = router.query.currentPage || 1;
   return (
     <div className={styles.characterInfo}>
       <div className={styles.infoWrap}>
@@ -37,7 +42,7 @@ const CardInfo: React.FC<Props> = ({ pokemonData }) => {
           alt="image person"
         />
         <div>
-          <Link href={`/`}>
+          <Link href={`/?page=${currentPage}&limit=${itemsAmount}&offset=${offset}`}>
             <Button className={'backButton'}>Back</Button>
           </Link>
         </div>

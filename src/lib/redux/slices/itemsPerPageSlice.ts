@@ -9,7 +9,7 @@ type itemsAmountState = {
 };
 
 const initialState: itemsAmountState = {
-  itemsAmount: '10',
+  itemsAmount: '3',
   offset: '0',
   currentPage: '1',
   lastPage: '',

@@ -9,13 +9,9 @@ type Props = {
   getInputValue: () => void;
 };
 
-const InputSearch: React.FC<Props> = ({
-  placeholder,
-  className,
-  onChange,
-  getInputValue,
-  pokemonName,
-}) => {
+const InputSearch: React.FC<Props> = (props) => {
+  const { placeholder, className, onChange, getInputValue, pokemonName } = props;
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       getInputValue();

@@ -11,10 +11,8 @@ import Layout from '../Layout';
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const pokemon = typeof context.query.pokemon === 'string' ? context.query.pokemon : '';
-    // const page = typeof context.query.page === 'string' ? parseInt(context.query.page) : 1;
-    const limit = typeof context.query.limit === 'string' ? parseInt(context.query.limit) : 10;
-    const offset = typeof context.query.offset === 'string' ? parseInt(context.query.offset) : 10;
-
+    const limit = typeof context.query.limit === 'string' ? parseInt(context.query.limit) : 3;
+    const offset = typeof context.query.offset === 'string' ? parseInt(context.query.offset) : 0;
     const { id } = context.params || {};
     let pokemonData: Pokemon | null = null;
 
@@ -51,13 +49,34 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
       return { notFound: true };
     }
 
-    return {
-      props: {
-        pokemonData,
-        count: data.count,
-        pokemons,
-      },
-    };
+    const pokemonSearch = data.name
+      ? [
+          {
+            id: data.id,
+            name: data.name,
+            weight: data.weight,
+            height: data.height,
+            sprites: data.sprites.front_shiny,
+          },
+        ]
+      : [];
+
+    if (data.count) {
+      return {
+        props: {
+          pokemonData,
+          count: data.count,
+          pokemons,
+        },
+      };
+    } else
+      return {
+        props: {
+          pokemonData,
+          count: 0,
+          pokemons: pokemonSearch,
+        },
+      };
   }
 );
 

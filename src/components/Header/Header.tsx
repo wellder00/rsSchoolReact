@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
 import Image from 'next/image';
+import React, { useState } from 'react';
 import styles from './Header.module.scss';
 
 import { Button } from '../Button';
 import { InputSearch } from '../InputSearch';
 
+import { saveItemValue } from '@/lib//redux/slices/inputValueSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks/reduxHooks';
+import { changeItemsAmount } from '@/lib/redux/slices/itemsPerPageSlice';
+import { useRouter } from 'next/router';
 import logo from '../../../public/assets/images/logo.png';
 import title from '../../../public/assets/images/title.png';
-import { saveItemValue } from '@/lib//redux/slices/inputValueSlice';
 
-type Props = {
-  onSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-};
-
-const Header: React.FC<Props> = ({ onSelectChange }) => {
+const Header = () => {
   const dispatch = useAppDispatch();
-  const itemsAmount = useAppSelector((state) => state.itemsAmount.itemsAmount);
+  const router = useRouter();
 
+  const itemsAmount = useAppSelector((state) => state.itemsAmount.itemsAmount);
   const inputValue = useAppSelector((state) => state.inputValue.value);
+
   const [hasError, setHasError] = useState(false);
   const [pokemonName, setPokemonName] = useState(inputValue);
 
@@ -26,9 +26,21 @@ const Header: React.FC<Props> = ({ onSelectChange }) => {
     setPokemonName(event.target.value);
   };
 
+  const onSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedItemsAmount = event.target.value;
+    dispatch(changeItemsAmount(selectedItemsAmount));
+
+    router.push(`/?page=1&limit=${selectedItemsAmount}&offset=0`);
+  };
+
   const handleSearch = () => {
     dispatch(saveItemValue(pokemonName));
-    setPokemonName('');
+
+    if (pokemonName) {
+      router.push(`/?pokemon=${pokemonName}&page=1&limit=3&offset=0`);
+    } else {
+      router.push(`/?page=1&limit=3&offset=0`);
+    }
   };
 
   const handleMakeError = () => {
@@ -45,9 +57,9 @@ const Header: React.FC<Props> = ({ onSelectChange }) => {
 
       <div className={styles.searchWrap}>
         <select onChange={onSelectChange} className={styles.select} value={itemsAmount}>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="12">12</option>
         </select>
 
         <InputSearch
