@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import arrow from '../../../public/assets/images/arrow.png';
 import styles from './Pagination.module.scss';
+import React from 'react';
 
 const Pagination = () => {
   const router = useRouter();

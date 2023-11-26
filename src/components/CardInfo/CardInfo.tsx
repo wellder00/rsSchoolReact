@@ -1,4 +1,5 @@
 import styles from './CardInfo.module.scss';
+import React from 'react';
 
 import notFound from '../../../public/notFound.png';
 

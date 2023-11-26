@@ -2,6 +2,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getPokemon, getPokemons } from '@/lib/services/pokemonApi';
 import Head from 'next/head';
+import React from 'react';
 
 import { CardInfo } from '@/components/CardInfo';
 import { wrapper } from '@/lib/redux';

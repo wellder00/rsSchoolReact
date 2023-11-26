@@ -8,6 +8,7 @@ import teleportBottom from '../../public/assets/images/teleportBottom.png';
 import teleportTop from '../../public/assets/images/teleportTop.png';
 import styles from '../styles/Layout.module.scss';
 import { useEffect } from 'react';
+import React from 'react';
 
 type Props = {
   children?: React.ReactNode;

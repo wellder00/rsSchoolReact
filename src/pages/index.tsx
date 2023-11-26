@@ -3,6 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { wrapper } from '@/lib/redux';
 import { getPokemon, getPokemons } from '@/lib/services/pokemonApi';
 import Layout from './Layout';
+import React from 'react';
 
 export default function PageHome({
   pokemons,

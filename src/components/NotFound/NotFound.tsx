@@ -1,6 +1,7 @@
 import styles from './NotFound.module.scss';
 import notFound from '../../../public/notFound.png';
 import Image from 'next/image';
+import React from 'react';
 
 const NotFound = () => {
   return (

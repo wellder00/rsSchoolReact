@@ -1,6 +1,7 @@
 import styles from './CardBlock.module.scss';
 import Card from '../../components/Card/Card';
 import { useAppSelector } from '@/lib/redux/hooks/reduxHooks';
+import React from 'react';
 
 const CardBlock: React.FC = () => {
   const pokemons = useAppSelector((state) => state.savePokemons.pokemons);

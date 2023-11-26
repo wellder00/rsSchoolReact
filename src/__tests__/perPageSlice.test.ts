@@ -3,16 +3,18 @@ import itemsAmountReducer, {
   changeOffsetAmount,
   changeCurrentPage,
   changeLastPage,
-} from '../store/itemsPerPageSlice';
+  changeCount,
+} from '../lib/redux/slices/itemsPerPageSlice';
 
 describe('pokemonSlice', () => {
   it('test default state', () => {
     const res = itemsAmountReducer(undefined, { type: '' });
     expect(res).toEqual({
       currentPage: '1',
-      itemsAmount: '10',
+      itemsAmount: '3',
       lastPage: '',
       offset: '0',
+      count: '',
     });
   });
 
@@ -24,6 +26,7 @@ describe('pokemonSlice', () => {
         offset: '0',
         currentPage: '1',
         lastPage: '',
+        count: '',
       },
       action
     );
@@ -31,6 +34,7 @@ describe('pokemonSlice', () => {
     expect(res.offset).toBe('0');
     expect(res.currentPage).toBe('1');
     expect(res.lastPage).toBe('');
+    expect(res.count).toBe('');
   });
 
   it('should save items offset', () => {
@@ -41,6 +45,7 @@ describe('pokemonSlice', () => {
         offset: '0',
         currentPage: '1',
         lastPage: '',
+        count: '',
       },
       action
     );
@@ -48,6 +53,7 @@ describe('pokemonSlice', () => {
     expect(res.offset).toBe('20');
     expect(res.currentPage).toBe('1');
     expect(res.lastPage).toBe('');
+    expect(res.count).toBe('');
   });
 
   it('should save items currentPage', () => {
@@ -58,6 +64,7 @@ describe('pokemonSlice', () => {
         offset: '0',
         currentPage: '1',
         lastPage: '',
+        count: '',
       },
       action
     );
@@ -65,6 +72,7 @@ describe('pokemonSlice', () => {
     expect(res.offset).toBe('0');
     expect(res.currentPage).toBe('120');
     expect(res.lastPage).toBe('');
+    expect(res.count).toBe('');
   });
 
   it('should save items lastPage', () => {
@@ -74,6 +82,7 @@ describe('pokemonSlice', () => {
       offset: '0',
       currentPage: '1',
       lastPage: '',
+      count: '',
     };
 
     const res = itemsAmountReducer(initialState, action);
@@ -82,5 +91,24 @@ describe('pokemonSlice', () => {
     expect(res.offset).toBe('0');
     expect(res.currentPage).toBe('1');
     expect(res.lastPage).toBe('10');
+    expect(res.count).toBe('');
+  });
+  it('should save count', () => {
+    const action = { type: changeCount.type, payload: '10' };
+    const initialState = {
+      itemsAmount: '10',
+      offset: '0',
+      currentPage: '1',
+      lastPage: '',
+      count: '',
+    };
+
+    const res = itemsAmountReducer(initialState, action);
+
+    expect(res.itemsAmount).toBe('10');
+    expect(res.offset).toBe('0');
+    expect(res.currentPage).toBe('1');
+    expect(res.lastPage).toBe('');
+    expect(res.count).toBe('10');
   });
 });
