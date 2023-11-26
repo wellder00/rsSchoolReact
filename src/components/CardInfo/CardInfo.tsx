@@ -3,7 +3,6 @@ import React from 'react';
 
 import notFound from '../../../public/notFound.png';
 
-// import { Loader } from '../Loader';
 import { Pokemon, stats } from '@/types/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';

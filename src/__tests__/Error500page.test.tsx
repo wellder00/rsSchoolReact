@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import Error500 from '../pages/500';
 
 describe('Error404', () => {
