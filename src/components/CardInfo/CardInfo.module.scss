@@ -1,0 +1,53 @@
+@import '../../styles/variables.scss';
+
+.characterInfo {
+  position: relative;
+  flex: 1;
+  margin-top: 20px;
+  padding-right: 15px;
+  min-width: 200px;
+  max-width: 350px;
+}
+
+.infoWrap {
+  position: sticky;
+  top: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background: $card-color;
+  font-size: 18px;
+  text-align: center;
+}
+
+.title {
+  filter: drop-shadow(2px 1px 2px red);
+  margin: 20px 0 0 0;
+  color: orange;
+}
+
+.blockInfo {
+  padding: 10px 0;
+}
+
+.blockInfo div {
+  padding: 2px 0;
+}
+
+.image {
+  border-radius: 15px;
+  width: 300px;
+  @media (max-width: 1000px) {
+    width: 200px;
+  }
+}
+
+.listWrap {
+  display: flex;
+  justify-content: center;
+}
+
+.list {
+  padding: 0 4px;
+  list-style: none;
+  text-align: start;
+}

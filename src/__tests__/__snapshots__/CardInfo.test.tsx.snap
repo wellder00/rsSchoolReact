@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardInfo Component Find card weight 1`] = `
+<DocumentFragment>
+  <div
+    class="characterInfo"
+  >
+    <div
+      class="infoWrap"
+    >
+      <h3
+        class="title"
+      >
+        ditto
+      </h3>
+      <div
+        class="blockInfo"
+      >
+        <div>
+          Weight: 40
+        </div>
+        <div>
+          Species: ditto
+        </div>
+        <div
+          class="listWrap"
+        >
+          <ul
+            class="list"
+          >
+            <li>
+              defense: string
+            </li>
+          </ul>
+        </div>
+      </div>
+      <img
+        alt="image person"
+        class="image"
+        data-nimg="1"
+        decoding="async"
+        height="300"
+        loading="lazy"
+        src="/_next/image?url=%2Fditto&w=640&q=75"
+        srcset="/_next/image?url=%2Fditto&w=384&q=75 1x, /_next/image?url=%2Fditto&w=640&q=75 2x"
+        style="color: transparent;"
+        width="300"
+      />
+      <div>
+        <a
+          href="/?page=1&limit=3&offset=0"
+        >
+          <button
+            class="backButton button"
+          >
+            Back
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

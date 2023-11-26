@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  display: flex;
+  position: relative;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  
+  width: 100%;
+  color: #fff;
+}
+
+.infoAndCardWrap {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.wrapCard {
+  flex: 2;
+  padding: 20px 0;
+  max-width: 1200px;
+}
+
+
+
+.none {
+  border-color: grey;
+}
