@@ -18,7 +18,6 @@ type Props = {
 
 const Layout: React.FC<Props> = ({ children, pokemons, count }) => {
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     dispatch(savePokemons(pokemons));
     dispatch(changeCount('' + count));

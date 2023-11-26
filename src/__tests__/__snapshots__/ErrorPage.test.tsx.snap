@@ -16,6 +16,11 @@ exports[`Error page component Show error page 1`] = `
     <p>
       Error
     </p>
+    <a
+      href="/"
+    >
+       Back to home 
+    </a>
   </div>
 </DocumentFragment>
 `;

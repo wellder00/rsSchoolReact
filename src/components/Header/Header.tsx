@@ -37,9 +37,9 @@ const Header = () => {
     dispatch(saveItemValue(pokemonName));
 
     if (pokemonName) {
-      router.push(`/?pokemon=${pokemonName}&page=1&limit=3&offset=0`);
+      router.push(`/?pokemon=${pokemonName}&page=1&limit=4&offset=0`);
     } else {
-      router.push(`/?page=1&limit=3&offset=0`);
+      router.push(`/?page=1&limit=4&offset=0`);
     }
   };
 
@@ -48,7 +48,7 @@ const Header = () => {
   };
 
   if (hasError) {
-    throw new Error('Everything is broken, everything is destroyed');
+    router.push('/error');
   }
 
   return (
