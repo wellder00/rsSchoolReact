@@ -10,7 +10,7 @@ const Pagination = () => {
   const lastPage = useAppSelector((state) => state.itemsAmount.lastPage);
   const offset = parseInt(router.query.offset as string) || 0;
   const currentPage = parseInt(router.query.page as string) || 1;
-  const itemsAmount = parseInt(router.query.limit as string) || 1;
+  const itemsAmount = parseInt(router.query.limit as string) || 4;
 
   const isPrevButtonDisabled = currentPage <= 1;
   const isNextButtonDisabled = currentPage === +lastPage;

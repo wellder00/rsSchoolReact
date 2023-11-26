@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   (store) => async (context) => {
     try {
       const pokemon = typeof context.query.pokemon === 'string' ? context.query.pokemon : '';
-      const limit = typeof context.query.limit === 'string' ? parseInt(context.query.limit) : 3;
+      const limit = typeof context.query.limit === 'string' ? parseInt(context.query.limit) : 4;
       const offset = typeof context.query.offset === 'string' ? parseInt(context.query.offset) : 0;
 
       const data = await store.dispatch(getPokemons.initiate({ pokemon, limit, offset })).unwrap();
