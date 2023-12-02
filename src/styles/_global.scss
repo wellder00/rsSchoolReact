@@ -1,0 +1,148 @@
+body {
+  animation: gradientAnimation 35s infinite;
+  background: linear-gradient(45deg, #3e51bb, #00bcd4, #ff5722);
+  background-size: 400% 400%;
+  color: white;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.custom-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .custom-form-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: rgb(104, 2, 182);
+    padding: 20px;
+    width: 400px;
+
+    .custom-form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+
+      font-family: 'Metal Mania', cursive;
+      letter-spacing: 2px;
+    }
+
+    .custom-form-input {
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px;
+      width: 100%;
+      font-family: 'Young Serif', serif;
+    }
+
+    .custom-form-error {
+      margin-top: 5px;
+      color: red;
+    }
+
+    .custom-input-field {
+      margin-bottom: 15px;
+    }
+
+    .custom-input-group {
+      display: flex;
+      justify-content: space-between;
+
+      .custom-input-field {
+        flex: 1;
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .custom-input-field__gender {
+      display: flex;
+      align-items: center;
+
+      .custom-form-gender {
+        margin-right: 10px;
+      }
+    }
+
+    .custom-picture {
+      margin-bottom: 15px;
+    }
+
+    .custom-check-box-wrapper {
+      display: flex;
+      align-items: center;
+
+      .custom-checker-label {
+        margin-left: 5px;
+      }
+    }
+
+    .custom-form-submit {
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      padding: 10px;
+      width: 100%;
+      color: #fff;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &.custom-disabled-btn {
+        cursor: not-allowed;
+        background-color: #ccc;
+
+        &:hover {
+          background-color: #ccc;
+        }
+      }
+    }
+  }
+}
+
+.checkbox-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checker {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+}
+
+.label-checker {
+  cursor: pointer;
+}
+
+.gender-label {
+  padding-right: 10px;
+}
+
+.gender {
+  padding-left: 5px;
+  cursor: pointer;
+}
