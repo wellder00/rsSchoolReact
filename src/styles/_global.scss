@@ -43,6 +43,7 @@ body {
     .custom-form-input {
       box-sizing: border-box;
       margin-bottom: 10px;
+      margin-bottom: 25px;
       border: 1px solid #ccc;
       border-radius: 4px;
       padding: 8px;
@@ -51,6 +52,8 @@ body {
     }
 
     .custom-form-error {
+      position: absolute;
+      top: 60px;
       margin-top: 5px;
       color: red;
     }
@@ -143,6 +146,10 @@ body {
 }
 
 .gender {
-  padding-left: 5px;
   cursor: pointer;
+  padding-left: 5px;
+}
+
+.input-wrapper {
+  position: relative;
 }

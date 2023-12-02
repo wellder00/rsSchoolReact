@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import inputValueReducer from './inputValueSlice';
-import itemsAmountReducer from './itemsPerPageSlice';
+import dataFormReducer from './dataFormSlice';
+import { countriesApi } from './counterApi';
 
 const store = configureStore({
   reducer: {
-    inputValue: inputValueReducer,
-    itemsAmount: itemsAmountReducer,
+    dataForm: dataFormReducer,
+    [countriesApi.reducerPath]: countriesApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(countriesApi.middleware),
 });
 
 export default store;

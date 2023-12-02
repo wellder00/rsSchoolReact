@@ -1,0 +1,49 @@
+.previewWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.previewCard {
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgb(42, 22, 42);
+  padding: 16px;
+  width: 200px;
+  text-align: center;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &.animation {
+    animation: fadeInUp 2s ease-in-out;
+  }
+
+  span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .previewImage {
+    margin-top: 8px;
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    background-color: greenyellow;
+  }
+  to {
+    opacity: 1;
+  }
+}
