@@ -7,7 +7,12 @@ export const schemaValidate = yup.object().shape({
     .string()
     .required('Please enter your name')
     .matches(/^[A-Z][a-z]*$/, 'Name should start with an uppercase letter'),
-  age: yup.number().required('Please enter your age').positive('Age should be a positive number'),
+  age: yup
+    .number()
+    .required('Please enter your age')
+    .positive('Age should be a positive number')
+    .transform((value) => (isNaN(value) ? undefined : value))
+    .nullable(),
 
   email: yup.string().required('Please enter your email').email('Invalid email format'),
   password: yup
