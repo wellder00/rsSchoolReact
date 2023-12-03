@@ -97,6 +97,7 @@ const UnControlledForm = () => {
                 Password:
               </label>
               <input
+                type="password"
                 name="password"
                 onChange={handlePasswordChange}
                 id="custom-password"
@@ -119,6 +120,7 @@ const UnControlledForm = () => {
                 Confirm Password:
               </label>
               <input
+                type="password"
                 name="confirmpassword"
                 id="custom-confirmpassword"
                 className="custom-form-input"

@@ -74,7 +74,12 @@ const ControlledForm = () => {
               <label htmlFor="custom-password" className="custom-form-label">
                 Password:
               </label>
-              <input id="custom-password" className="custom-form-input" {...register('password')} />
+              <input
+                type="password"
+                id="custom-password"
+                className="custom-form-input"
+                {...register('password')}
+              />
               {errors.password && <p className="custom-form-error">{errors.password.message}</p>}
             </div>
           </div>
@@ -92,6 +97,7 @@ const ControlledForm = () => {
                 Confirm Password:
               </label>
               <input
+                type="password"
                 id="custom-confirmpassword"
                 className="custom-form-input"
                 {...register('confirmpassword')}
