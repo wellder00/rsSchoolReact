@@ -7,15 +7,21 @@ import { TypesForm, schemaValidate } from '../../utils/validation/validate';
 import Routes from '../../utils/constants/routes';
 import { useAppDispatch } from '../../Hooks/reduxHooks';
 import { addFormData } from '../../store/dataFormSlice';
+import { CountryList } from '@components/CountryList';
+import { useEffect, useState } from 'react';
+
+import { verificationPassword } from '../../utils/validatePassword';
 
 const ControlledForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [verification, setVerification] = useState(0);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    watch,
   } = useForm<TypesForm>({ mode: 'onChange', resolver: yupResolver(schemaValidate) });
 
   const onSubmit = async (data: TypesForm) => {
@@ -27,6 +33,11 @@ const ControlledForm = () => {
       navigate(Routes.HOME);
     }
   };
+  const watchPassword = watch().password;
+
+  useEffect(() => {
+    setVerification(verificationPassword(watchPassword));
+  }, [watchPassword]);
 
   return (
     <div className="custom-form-wrapper">
@@ -66,7 +77,16 @@ const ControlledForm = () => {
               <input id="custom-password" className="custom-form-input" {...register('password')} />
               {errors.password && <p className="custom-form-error">{errors.password.message}</p>}
             </div>
+          </div>
 
+          <div className="field-strength">Strength: {verification}</div>
+          {verification >= 4 ? (
+            <div className="strong">Password meets strength criteria!</div>
+          ) : (
+            <div className="not-strong">Password does not meet the strength criteria.</div>
+          )}
+
+          <div className="input-wrapper">
             <div className="custom-input-field">
               <label htmlFor="custom-confirmpassword" className="custom-form-label">
                 Confirm Password:
@@ -81,6 +101,10 @@ const ControlledForm = () => {
               )}
             </div>
           </div>
+        </div>
+
+        <div className="input-wrapper">
+          <CountryList {...register('country')} />
         </div>
 
         <div className="input-wrapper">

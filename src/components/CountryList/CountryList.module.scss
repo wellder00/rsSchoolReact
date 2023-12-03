@@ -1,0 +1,42 @@
+.customCountryInputWrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.customCountryInput {
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  &:focus {
+    border-color: #007bff;
+  }
+}
+
+.countryDropdown {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  z-index: 1;
+  margin-top: 5px;
+  background-color: rgba(0, 0, 0, 0.874);
+  padding: 0;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.countryDropdownItem {
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  border-bottom: 1px solid #743f3f;
+  padding: 10px;
+
+  &:hover {
+    background-color: gray;
+  }
+}

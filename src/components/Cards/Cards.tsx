@@ -18,6 +18,7 @@ const Cards = () => {
           <span>Age: {formData.age}</span>
           <span>Gender: {formData.gender}</span>
           <span>Password: {formData.password}</span>
+          <span>Country: {formData.country}</span>
           <img
             className={styles.previewImage}
             src={formData.image ? formData.image : ''}

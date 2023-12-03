@@ -38,5 +38,5 @@ export const schemaValidate = yup.object().shape({
       const fileList = value as FileList;
       return fileList && fileList[0] && ['image/png', 'image/jpeg'].includes(fileList[0].type);
     }),
-  // country: yup.string().required('Please select your country'),
+  country: yup.string().required('Please select your country'),
 });
