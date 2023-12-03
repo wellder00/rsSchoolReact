@@ -2,13 +2,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { convertJpegPng } from '../../utils/convertor64';
-import { TypesForm, schemaValidate } from '../../utils/validation/validate';
-import Routes from '../../utils/constants/routes';
-import { useAppDispatch } from '../../Hooks/reduxHooks';
-import { addFormData } from '../../store/dataFormSlice';
 import { CountryList } from '@components/CountryList';
 import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../Hooks/reduxHooks';
+import { addFormData } from '../../store/dataFormSlice';
+import Routes from '../../utils/constants/routes';
+import { convertJpegPng } from '../../utils/convertor64';
+import { TypesForm, schemaValidate } from '../../utils/validation/validate';
 
 import { verificationPassword } from '../../utils/validatePassword';
 
@@ -132,7 +132,7 @@ const ControlledForm = () => {
             <input
               id="custom-picture"
               className="custom-form-input"
-              {...register('image', { required: 'Picture is required' })}
+              {...register('image')}
               type="file"
             />
             {errors.image && <p className="custom-form-error">{errors.image.message}</p>}

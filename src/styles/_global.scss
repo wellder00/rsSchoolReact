@@ -21,107 +21,106 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px 0;
   height: 100vh;
+}
 
-  .custom-form-container {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: rgb(104, 2, 182);
-    padding: 20px;
-    width: 400px;
+.custom-form-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: rgb(104, 2, 182);
+  padding: 20px;
+  width: 400px;
+}
 
-    .custom-form-label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+.custom-form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-family: 'Metal Mania', cursive;
+  letter-spacing: 2px;
+}
 
-      font-family: 'Metal Mania', cursive;
-      letter-spacing: 2px;
-    }
+.custom-form-input {
+  box-sizing: border-box;
+  margin-bottom: 25px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  font-family: 'Young Serif', serif;
+}
 
-    .custom-form-input {
-      box-sizing: border-box;
-      margin-bottom: 10px;
-      margin-bottom: 25px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding: 8px;
-      width: 100%;
-      font-family: 'Young Serif', serif;
-    }
+.custom-form-error {
+  position: absolute;
+  top: 60px;
+  margin-top: 5px;
+  color: red;
+}
 
-    .custom-form-error {
-      position: absolute;
-      top: 60px;
-      margin-top: 5px;
-      color: red;
-    }
+.custom-input-field {
+  margin-bottom: 15px;
+}
 
-    .custom-input-field {
-      margin-bottom: 15px;
-    }
+.custom-input-group {
+  display: flex;
+  justify-content: space-between;
+}
 
-    .custom-input-group {
-      display: flex;
-      justify-content: space-between;
+.custom-input-field {
+  flex: 1;
+  margin-right: 10px;
+}
 
-      .custom-input-field {
-        flex: 1;
-        margin-right: 10px;
+.custom-input-field:last-child {
+  margin-right: 0;
+}
 
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
+.custom-input-field__gender {
+  display: flex;
+  align-items: center;
+}
 
-    .custom-input-field__gender {
-      display: flex;
-      align-items: center;
+.custom-form-gender {
+  margin-right: 10px;
+}
 
-      .custom-form-gender {
-        margin-right: 10px;
-      }
-    }
+.custom-picture {
+  margin-bottom: 15px;
+}
 
-    .custom-picture {
-      margin-bottom: 15px;
-    }
+.custom-check-box-wrapper {
+  display: flex;
+  align-items: center;
+}
 
-    .custom-check-box-wrapper {
-      display: flex;
-      align-items: center;
+.custom-checker-label {
+  margin-left: 5px;
+}
 
-      .custom-checker-label {
-        margin-left: 5px;
-      }
-    }
+.custom-form-submit {
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  padding: 10px;
+  width: 100%;
+  color: #fff;
+}
 
-    .custom-form-submit {
-      transition: background-color 0.3s ease;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-      background-color: #007bff;
-      padding: 10px;
-      width: 100%;
-      color: #fff;
+.custom-form-submit:hover {
+  background-color: #0056b3;
+}
 
-      &:hover {
-        background-color: #0056b3;
-      }
+.custom-form-submit.custom-disabled-btn {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
 
-      &.custom-disabled-btn {
-        cursor: not-allowed;
-        background-color: #ccc;
-
-        &:hover {
-          background-color: #ccc;
-        }
-      }
-    }
-  }
+.custom-form-submit.custom-disabled-btn:hover {
+  background-color: #ccc;
 }
 
 .checkbox-wrapper {
@@ -164,4 +163,18 @@ body {
 
 .field-strength {
   color: #ffa600;
+}
+
+.checkbox-error {
+  position: absolute;
+  top: 15px;
+  margin-top: 5px;
+  color: red;
+}
+
+.country-error {
+  position: absolute;
+  top: 37px;
+  margin-top: 5px;
+  color: red;
 }

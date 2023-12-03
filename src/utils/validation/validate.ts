@@ -12,7 +12,9 @@ export const schemaValidate = yup.object().shape({
     .required('Please enter your age')
     .positive('Age should be a positive number')
     .transform((value) => (isNaN(value) ? undefined : value))
-    .nullable(),
+    .nullable()
+    .min(7, 'Must be at least 13 years old')
+    .max(80, 'Are you really so old?'),
 
   email: yup.string().required('Please enter your email').email('Invalid email format'),
   password: yup

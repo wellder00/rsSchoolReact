@@ -6,24 +6,20 @@ const Cards = () => {
 
   return (
     <div className={styles.previewWrapper}>
-      {formDataList.map((formData, index) => (
+      {formDataList.map(({ name, email, age, gender, password, country, image }, index) => (
         <div
           className={`${styles.previewCard} ${
-            index === formDataList.length - 1 ? styles.animation : ''
+            index === formDataList.length - 1 && styles.animation
           }`}
-          key={formData.password}
+          key={`${index}${password}`}
         >
-          <span>Name: {formData.name}</span>
-          <span>Email: {formData.email}</span>
-          <span>Age: {formData.age}</span>
-          <span>Gender: {formData.gender}</span>
-          <span>Password: {formData.password}</span>
-          <span>Country: {formData.country}</span>
-          <img
-            className={styles.previewImage}
-            src={formData.image ? formData.image : ''}
-            alt={formData.name}
-          />
+          <span>Name: {name}</span>
+          <span>Email: {email}</span>
+          <span>Age: {age}</span>
+          <span>Gender: {gender}</span>
+          <span>Password: {password}</span>
+          <span>Country: {country}</span>
+          {image && <img className={styles.previewImage} src={image} alt={name} />}
         </div>
       ))}
     </div>
