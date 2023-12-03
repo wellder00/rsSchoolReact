@@ -1,21 +1,17 @@
+import { CountryList } from '@components/CountryList';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
-import { CountryList } from '@components/CountryList';
-import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../Hooks/reduxHooks';
 import { addFormData } from '../../store/dataFormSlice';
 import Routes from '../../utils/constants/routes';
 import { convertJpegPng } from '../../utils/convertor64';
-import { TypesForm, schemaValidate } from '../../utils/validation/validate';
-
 import { verificationPassword } from '../../utils/validatePassword';
+import { TypesForm, schemaValidate } from '../../utils/validation/validate';
 
 const ControlledForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [verification, setVerification] = useState(0);
 
   const {
     register,
@@ -34,10 +30,7 @@ const ControlledForm = () => {
     }
   };
   const watchPassword = watch().password;
-
-  useEffect(() => {
-    setVerification(verificationPassword(watchPassword));
-  }, [watchPassword]);
+  const watcherPassword = verificationPassword(watchPassword);
 
   return (
     <div className="custom-form-wrapper">
@@ -84,8 +77,8 @@ const ControlledForm = () => {
             </div>
           </div>
 
-          <div className="field-strength">Strength: {verification}</div>
-          {verification >= 4 ? (
+          <div className="field-strength">Strength: {watcherPassword}</div>
+          {watcherPassword >= 4 ? (
             <div className="strong">Password meets strength criteria!</div>
           ) : (
             <div className="not-strong">Password does not meet the strength criteria.</div>
